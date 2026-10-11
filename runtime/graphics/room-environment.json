@@ -1,0 +1,9 @@
+{
+  "origin": "Three.js RoomEnvironment (preserved upstream dependency)",
+  "geometry": "room, six rotated boxes, six light cards",
+  "pointLightIntensity": 900,
+  "ggxSamplesPerTexel": 192,
+  "size": 128,
+  "mips": 8,
+  "sha256": "ac815be62e6ccba2f9376961fd7362d0f71ba0e54ea792bc53707cd84fa41bf8"
+}

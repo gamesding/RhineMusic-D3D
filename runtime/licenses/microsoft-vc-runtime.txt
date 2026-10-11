@@ -1,0 +1,11 @@
+Microsoft Visual C++ VC143 x64 Redistributable 14.44.35112
+Copyright Microsoft Corporation. All rights reserved.
+
+These official redistributable runtime DLLs are included for the unmodified
+AMD FidelityFX upscaler. The native frontend itself links its CRT statically.
+Files are copied from the licensed Visual Studio installation, not from a
+third-party DLL download site. Microsoft licensing applies; no MIT relicensing.
+
+https://learn.microsoft.com/en-us/cpp/windows/redistributing-visual-cpp-files
+https://learn.microsoft.com/en-us/cpp/windows/deployment-in-visual-cpp
+https://visualstudio.microsoft.com/license-terms/

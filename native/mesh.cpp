@@ -1,0 +1,27 @@
+#include "mesh.hpp"
+#define CGLTF_IMPLEMENTATION
+#include <cgltf.h>
+namespace rhine {
+using namespace DirectX;
+std::vector<MeshData> loadMusicModel(const std::filesystem::path& file,bool music){
+    // Read through a native Unicode path, then parse the same Blender GLB bytes.
+    std::ifstream stream(file,std::ios::binary|std::ios::ate);if(!stream)throw std::runtime_error("Original Blender model is missing");auto length=stream.tellg();if(length<=0||length>128*1024*1024)throw std::runtime_error("Invalid GLB size");stream.seekg(0);std::vector<unsigned char> bytes(size_t(length),0);stream.read(reinterpret_cast<char*>(bytes.data()),length);
+    cgltf_options options{};cgltf_data* raw=nullptr;if(cgltf_parse(&options,bytes.data(),bytes.size(),&raw)!=cgltf_result_success)throw std::runtime_error("Original GLB parse failed");std::unique_ptr<cgltf_data,decltype(&cgltf_free)> model(raw,cgltf_free);
+    if(cgltf_load_buffers(&options,raw,nullptr)!=cgltf_result_success||cgltf_validate(raw)!=cgltf_result_success)throw std::runtime_error("Original GLB buffer validation failed");
+    std::vector<MeshData> meshes;
+    for(size_t nodeIndex=0;nodeIndex<raw->nodes_count;++nodeIndex){auto& node=raw->nodes[nodeIndex];if(!node.mesh)continue;float matrix[16];cgltf_node_transform_world(&node,matrix);XMFLOAT4X4 transform;std::copy(matrix,matrix+16,&transform._11);auto world=XMLoadFloat4x4(&transform);auto normalMatrix=XMMatrixTranspose(XMMatrixInverse(nullptr,world));
+        for(size_t primitiveIndex=0;primitiveIndex<node.mesh->primitives_count;++primitiveIndex){auto& primitive=node.mesh->primitives[primitiveIndex];if(primitive.type!=cgltf_primitive_type_triangles)throw std::runtime_error("Unexpected source primitive");MeshData mesh;mesh.name=node.name?node.name:"Music part";mesh.surface=primitive.material&&primitive.material->name?primitive.material->name:"Frosted_Polymer";auto suffix=mesh.surface.find('.');if(suffix!=std::string::npos)mesh.surface.resize(suffix);
+            mesh.archive=!music;auto delimiter=mesh.name.find("__");mesh.part=music?(mesh.surface=="Frosted_Polymer"?"cover":mesh.surface=="Optical_Diffuser"?"substrate":"carrier"):mesh.name.substr(0,delimiter);mesh.arrayEligible=music||mesh.surface=="Frosted_Polymer"||mesh.surface=="Ivory_Edges"||mesh.surface=="Titanium_Fasteners"||mesh.surface=="Index_Inlay"||mesh.surface=="Optical_Diffuser";
+            if(primitive.material){auto& mat=*primitive.material;auto& pbr=mat.pbr_metallic_roughness;mesh.color={pbr.base_color_factor[0],pbr.base_color_factor[1],pbr.base_color_factor[2],pbr.base_color_factor[3]};mesh.finish={pbr.roughness_factor,pbr.metallic_factor,mat.has_transmission?mat.transmission.transmission_factor:0,.04f};mesh.emission={mat.emissive_factor[0],mat.emissive_factor[1],mat.emissive_factor[2],mat.has_ior?mat.ior.ior:1.46f};}
+            auto setColor=[&](unsigned hex){auto linear=[](float c){return c<=.04045f?c/12.92f:std::pow((c+.055f)/1.055f,2.4f);};mesh.color={linear(float(hex>>16&255)/255),linear(float(hex>>8&255)/255),linear(float(hex&255)/255),1};};
+            if(!music){if(mesh.surface=="Carbon_Ink")continue;if(mesh.surface=="Frosted_Polymer"){setColor(0xfffdfa);mesh.finish={.21f,0,.9f,.12f};mesh.attenuation={.855f,.791f,.738f,2};}else if(mesh.surface=="Ivory_Edges"){setColor(0xf0e7df);mesh.finish.x=.31f;mesh.finish.z=.65f;}else if(mesh.surface=="Optical_Diffuser"){setColor(0xe2dad4);mesh.finish.x=.7f;mesh.finish.z=0;}else if(mesh.surface=="Internal_Ceramic"){setColor(0xc7beb6);mesh.finish.x=.6f;}else if(mesh.surface=="Printed_Label")setColor(0xeae5dc);else if(mesh.surface=="Subsurface_Optics"){setColor(0xb9aba1);mesh.finish.x=.48f;mesh.finish.y=.05f;}else if(mesh.surface=="Optical_Edges"){setColor(0xd4c7be);mesh.finish.x=.26f;mesh.finish.y=.08f;mesh.finish.z=0;}}
+            const cgltf_accessor *position=nullptr,*normal=nullptr,*uv=nullptr;for(size_t a=0;a<primitive.attributes_count;++a){auto& attribute=primitive.attributes[a];if(attribute.type==cgltf_attribute_type_position)position=attribute.data;if(attribute.type==cgltf_attribute_type_normal)normal=attribute.data;if(attribute.type==cgltf_attribute_type_texcoord&&attribute.index==0)uv=attribute.data;}
+            if(!position||!normal)throw std::runtime_error("GLB position/normal missing");mesh.vertices.resize(position->count);
+            for(size_t i=0;i<position->count;++i){float p[3],n[3],t[2]={};if(!cgltf_accessor_read_float(position,i,p,3)||!cgltf_accessor_read_float(normal,i,n,3))throw std::runtime_error("GLB accessor failed");if(uv)cgltf_accessor_read_float(uv,i,t,2);auto point=XMVector3TransformCoord(XMVectorSet(p[0],p[1],p[2],1),world),direction=XMVector3TransformNormal(XMVectorSet(n[0],n[1],n[2],0),normalMatrix);XMFLOAT3 mapped;XMStoreFloat3(&mapped,point);if(music)mapped={mapped.x*(4.45f/4.3f),(mapped.y-1.85f)*(3.35f/3.7f)+1.85f,mapped.z*(.14f/.26f)};if(music)direction=XMVectorMultiply(direction,XMVectorSet(4.3f/4.45f,3.7f/3.35f,.26f/.14f,0));XMStoreFloat3(&mesh.vertices[i].normal,XMVector3Normalize(direction));mesh.vertices[i].position=mapped;mesh.vertices[i].uv={t[0],t[1]};}
+            if(primitive.indices){mesh.indices.resize(primitive.indices->count);for(size_t i=0;i<mesh.indices.size();++i)mesh.indices[i]=unsigned(cgltf_accessor_read_index(primitive.indices,i));}else{for(unsigned i=0;i<mesh.vertices.size();++i)mesh.indices.push_back(i);}
+            meshes.push_back(std::move(mesh));
+        }
+    }
+    if(meshes.empty())throw std::runtime_error("Original model has no meshes");return meshes;
+}
+}

@@ -1,0 +1,641 @@
+{
+  "dlss": {
+    "tag": "v310.9.1",
+    "published": "2026-09-08T15:30:04Z",
+    "releaseUrl": "https://github.com/NVIDIA/DLSS/releases/tag/v310.9.1",
+    "assets": [
+      {
+        "name": "ngx_dlss_demo_linux.zip",
+        "url": "https://github.com/NVIDIA/DLSS/releases/download/v310.9.1/ngx_dlss_demo_linux.zip",
+        "bytes": 96907052
+      },
+      {
+        "name": "ngx_dlss_demo_windows.zip",
+        "url": "https://github.com/NVIDIA/DLSS/releases/download/v310.9.1/ngx_dlss_demo_windows.zip",
+        "bytes": 84484111
+      }
+    ],
+    "files": {
+      "LICENSE.txt": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/LICENSE.txt",
+        "sha256": "d4216e39ebef5f9b50a6712ebb37beeb5379862a67733a9999c651f21592aaf0",
+        "bytes": 26620
+      },
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/README.md",
+        "sha256": "323a99117be4a1b6595ab0d721e9c613750c278366615b57168b3ea9967afac5",
+        "bytes": 690
+      },
+      "include/nvsdk_ngx.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx.h",
+        "sha256": "dc38e7467cf415379c9d12ae1b6e4a494c453ed92720fb53e92aecb523e7b848",
+        "bytes": 40289
+      },
+      "include/nvsdk_ngx_defs.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_defs.h",
+        "sha256": "ea23f33497cd274860d1c25a97644fce807dcb0037c594547203343103fad03e",
+        "bytes": 44313
+      },
+      "include/nvsdk_ngx_defs_dlssd.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_defs_dlssd.h",
+        "sha256": "2e97fe1595b1334f71b51724f2cb67496e8c296a7a2eec5606da53055882e716",
+        "bytes": 14693
+      },
+      "include/nvsdk_ngx_defs_dlssg.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_defs_dlssg.h",
+        "sha256": "98ec3a6faa5aa250828c174bf8f3491aafac693dfe57cc798049c8918597fc60",
+        "bytes": 22885
+      },
+      "include/nvsdk_ngx_defs_vk.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_defs_vk.h",
+        "sha256": "0a24d0861ace7d6b9362a67b7f08bea1b33ea123c5ce730b19133de8a891d031",
+        "bytes": 3196
+      },
+      "include/nvsdk_ngx_helpers.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers.h",
+        "sha256": "5bcbadfe7478b802cf6d3aca4dc5ddd7d0889b99726e69c63f9e9bd555f44471",
+        "bytes": 5317
+      },
+      "include/nvsdk_ngx_helpers_cuda.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_cuda.h",
+        "sha256": "f2851a76107bdf4fbcb7b261f3c35573c312d8ecb4bc18fb02d9e2cec7705042",
+        "bytes": 3593
+      },
+      "include/nvsdk_ngx_helpers_d3d.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_d3d.h",
+        "sha256": "ec75224f36ed6580baaf250fa83620405ad81a1d98c2c436654a0c9cf6a6b8ba",
+        "bytes": 31976
+      },
+      "include/nvsdk_ngx_helpers_dlssd.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssd.h",
+        "sha256": "a25fdda925b479dfe869593aeba311ef08793da54e0391f2fe2fe756cbef5532",
+        "bytes": 732
+      },
+      "include/nvsdk_ngx_helpers_dlssd_cuda.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssd_cuda.h",
+        "sha256": "7e35cde214d905346a487b9a28c05d35e1c55b480e237fe3de69580a7e332730",
+        "bytes": 29175
+      },
+      "include/nvsdk_ngx_helpers_dlssd_d3d.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssd_d3d.h",
+        "sha256": "6df9d02c6f47feee3afc8d12340a9f554a7ddce4ddacb1b6a13a42b26c2c6293",
+        "bytes": 72668
+      },
+      "include/nvsdk_ngx_helpers_dlssd_vk.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssd_vk.h",
+        "sha256": "11df8fbda532a97fe867c8ef2b40058b49b7898183710f3468e55b1eedb8f40b",
+        "bytes": 38337
+      },
+      "include/nvsdk_ngx_helpers_dlssg.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssg.h",
+        "sha256": "6881d21419c40c78ec948b326902ece09fc112b0223144d51c4905f3fced7a1f",
+        "bytes": 732
+      },
+      "include/nvsdk_ngx_helpers_dlssg_d3d.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssg_d3d.h",
+        "sha256": "6335ebcb95de39a361e87fe0257d6ce0723e5d8deaa15db3b35afacf2b3f4220",
+        "bytes": 17445
+      },
+      "include/nvsdk_ngx_helpers_dlssg_vk.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_dlssg_vk.h",
+        "sha256": "b371d90b9f4372b9a415e68a0afbdc2f31b7b552e219a9637d848749bc965316",
+        "bytes": 17077
+      },
+      "include/nvsdk_ngx_helpers_vk.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_helpers_vk.h",
+        "sha256": "c192bff72138f12f770db48e12c1d8f712dfc81ea0e8e055ebb27d8dd1b31623",
+        "bytes": 19720
+      },
+      "include/nvsdk_ngx_loader.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_loader.h",
+        "sha256": "abdf5f66a692620538357d29fdf78e3e2a677ee8140b7a638962ecb766585e75",
+        "bytes": 13252
+      },
+      "include/nvsdk_ngx_params.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_params.h",
+        "sha256": "943bc8cc5cdae03b6303016fbad3183636f2335ae27a2d18776798c3b4efabbc",
+        "bytes": 7744
+      },
+      "include/nvsdk_ngx_params_dlssd.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_params_dlssd.h",
+        "sha256": "d41e3ba8f1d72583b55273092c99bf426dc4a0d46de827229e25d5b1325a370e",
+        "bytes": 1199
+      },
+      "include/nvsdk_ngx_params_dlssg.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_params_dlssg.h",
+        "sha256": "c24fa5aa68ffa2808c828b75cfa32843f1606f80a145f84055ac450d7e6c74ad",
+        "bytes": 6137
+      },
+      "include/nvsdk_ngx_standalone_common.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_standalone_common.h",
+        "sha256": "38413c3338b0aea0202c07da95d426bfee7080a42913823fa2d9dd585b087b53",
+        "bytes": 12985
+      },
+      "include/nvsdk_ngx_standalone_cuda.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_standalone_cuda.h",
+        "sha256": "b23436ed5040051ac8e81554c9af080f2463c941435bbc3b82222e5431a09499",
+        "bytes": 10906
+      },
+      "include/nvsdk_ngx_vk.h": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/include/nvsdk_ngx_vk.h",
+        "sha256": "2d364ce7132881eb669e9498fd570d74cba563b1fbebc82c235f8e1ad2dd8b6d",
+        "bytes": 38382
+      },
+      "lib/Windows_x86_64/rel/nvngx_dlss.dll": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/lib/Windows_x86_64/rel/nvngx_dlss.dll",
+        "sha256": "3975567b8943c53acce397f2b72380092f84f162d00b0d2c7d08a1025c563983",
+        "bytes": 58956912
+      },
+      "lib/Windows_x86_64/x64/nvsdk_ngx_s.lib": {
+        "url": "https://raw.githubusercontent.com/NVIDIA/DLSS/v310.9.1/lib/Windows_x86_64/x64/nvsdk_ngx_s.lib",
+        "sha256": "4e5d355086d2bc11e1a0842457d2519ea528ee1f3e112c45679a84960c07dff3",
+        "bytes": 3782558
+      }
+    }
+  },
+  "fsr": {
+    "tag": "v2.3.0",
+    "published": "2026-06-24T13:00:13Z",
+    "releaseUrl": "https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/releases/tag/v2.3.0",
+    "assets": [
+      {
+        "name": "FidelityFX-Samples-v2.3.0-prebuilt.zip",
+        "url": "https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/releases/download/v2.3.0/FidelityFX-Samples-v2.3.0-prebuilt.zip",
+        "bytes": 127451548
+      }
+    ],
+    "files": {
+      "Kits/FidelityFX/api/include/dx12/ffx_api_dx12.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/dx12/ffx_api_dx12.h",
+        "sha256": "c9afbc3c4c673723e9e5369a666f0ff54560543b5a93537f8ff453bf1c3bf530",
+        "bytes": 11323
+      },
+      "Kits/FidelityFX/api/include/dx12/ffx_api_dx12.hpp": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/dx12/ffx_api_dx12.hpp",
+        "sha256": "31972deed9c5b94243eb72c97e24c1b4e1a0171ae0d0109f7fe842b6efdeddc7",
+        "bytes": 1859
+      },
+      "Kits/FidelityFX/api/include/ffx_api.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/ffx_api.h",
+        "sha256": "e1a9d1b559eaf75f4cb401f1c43a66e2f3dc9621abfeb58b9c6fac56443177fd",
+        "bytes": 10726
+      },
+      "Kits/FidelityFX/api/include/ffx_api.hpp": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/ffx_api.hpp",
+        "sha256": "e1fab07fa9ab489db74813e6b754fc91dad6ded68870ab558002e92b6a32566a",
+        "bytes": 5884
+      },
+      "Kits/FidelityFX/api/include/ffx_api_loader.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/ffx_api_loader.h",
+        "sha256": "18d1901dbbc881e8131b91c65ad44bb3b4a1de6c31435d5b75236f16727ba80e",
+        "bytes": 2977
+      },
+      "Kits/FidelityFX/api/include/ffx_api_types.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/api/include/ffx_api_types.h",
+        "sha256": "cc0adc0ffc804dd7cd03c39c15581b575e416383177ffe95060201d52cc0fc49",
+        "bytes": 13636
+      },
+      "Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll",
+        "sha256": "d0dcccc74a43c44ba435b7a369b456e0970d8a4464e4bd683119b374f2c9fb46",
+        "bytes": 28761864
+      },
+      "Kits/FidelityFX/upscalers/include/ffx_upscale.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/upscalers/include/ffx_upscale.h",
+        "sha256": "65be36d5653eb71c10379e0204f7bb7cd6a8aeec96e6f8cffc5f59ffeb1f89bf",
+        "bytes": 19313
+      },
+      "Kits/FidelityFX/upscalers/include/ffx_upscale.hpp": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/Kits/FidelityFX/upscalers/include/ffx_upscale.hpp",
+        "sha256": "52066379fd629080ed5c9a2821627cd7a3b972e6592565c7f3fa54a95404bac0",
+        "bytes": 4580
+      },
+      "readme.md": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/v2.3.0/readme.md",
+        "sha256": "2e15839901c9c8079f93a792a7e0bbac64a6aa132e5dc826792eecfea4c1d0db",
+        "bytes": 7258
+      }
+    }
+  },
+  "json": {
+    "url": "https://raw.githubusercontent.com/nlohmann/json/v3.12.0/single_include/nlohmann/json.hpp",
+    "sha256": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+    "bytes": 953436
+  },
+  "cgltf": {
+    "url": "https://raw.githubusercontent.com/jkuhlmann/cgltf/v1.15/cgltf.h",
+    "sha256": "e378a21c084bf1f288bb799de827bb26906efb024255f1ecf1705ea13f11c6ec",
+    "bytes": 202865
+  },
+  "dxc": {
+    "repository": "microsoft/DirectXShaderCompiler",
+    "tag": "v1.9.2609",
+    "publishedAt": "2026-09-29T16:56:40Z",
+    "archive": {
+      "url": "https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.9.2609/dxc_2026_09_29.zip",
+      "sha256": "ad31b1fc8443175d204f77a611fdb3ef2ec42759bdc2f1167368de24a4a7e7f1",
+      "bytes": 32287592
+    }
+  },
+  "fsr1": {
+    "repository": "GPUOpen-Effects/FidelityFX-FSR",
+    "revision": "a21ffb8f6c13233ba336352bdff293894c706575",
+    "purpose": "DX11 compatibility only; DX12 uses current FSR SDK",
+    "files": {
+      "ffx-fsr/ffx_a.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-FSR/a21ffb8f6c13233ba336352bdff293894c706575/ffx-fsr/ffx_a.h",
+        "sha256": "f60e2722fcd13989523b9164d776ab382b3692791767f3bf8bb19967f763f3fb",
+        "bytes": 181915
+      },
+      "ffx-fsr/ffx_fsr1.h": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-FSR/a21ffb8f6c13233ba336352bdff293894c706575/ffx-fsr/ffx_fsr1.h",
+        "sha256": "93c3922362ea7fc99cbcc698ca30c98de4f8c246d1fbb0b09e015ddef38ce3a5",
+        "bytes": 60310
+      },
+      "license.txt": {
+        "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-FSR/a21ffb8f6c13233ba336352bdff293894c706575/license.txt",
+        "sha256": "db089274ce766da70f5b7d791029c3486f9f9e27c8c79c652689603d3192e802",
+        "bytes": 1094
+      }
+    }
+  },
+  "smaa": {
+    "repository": "iryoku/smaa",
+    "revision": "71c806a838bdd7d517df19192a20f0c61b3ca29d",
+    "mode": "SMAA 1x HIGH",
+    "files": {
+      "SMAA.hlsl": {
+        "url": "https://raw.githubusercontent.com/iryoku/smaa/71c806a838bdd7d517df19192a20f0c61b3ca29d/SMAA.hlsl",
+        "sha256": "4db53d92ef0b45661f8450303589ffabce93c352cae4282a6f32dd2b80efbeb9",
+        "bytes": 55806
+      },
+      "Textures/AreaTex.h": {
+        "url": "https://raw.githubusercontent.com/iryoku/smaa/71c806a838bdd7d517df19192a20f0c61b3ca29d/Textures/AreaTex.h",
+        "sha256": "1933bf43ce86ba71f7ed5f0fa94b148610c634dc3395b9bc67a817d51ee73af2",
+        "bytes": 1166747
+      },
+      "Textures/SearchTex.h": {
+        "url": "https://raw.githubusercontent.com/iryoku/smaa/71c806a838bdd7d517df19192a20f0c61b3ca29d/Textures/SearchTex.h",
+        "sha256": "1fac315ab5f87b60083c9b8387af17f056204d3d1bf21500f2acc5b3e8c1a37a",
+        "bytes": 8610
+      },
+      "LICENSE.txt": {
+        "url": "https://raw.githubusercontent.com/iryoku/smaa/71c806a838bdd7d517df19192a20f0c61b3ca29d/LICENSE.txt",
+        "sha256": "2b848b67ba50ac40b53e11cf1ccdaee2a190ca83b4652cba695a5f1ce81f52ae",
+        "bytes": 1470
+      }
+    }
+  },
+  "basswasapi": {
+    "archive": {
+      "url": "https://www.un4seen.com/files/basswasapi24.zip",
+      "sha256": "74b754a925feded1ddd6b8b7b1a37bdc9b185e86abebdd46b1a7e0ff67815779",
+      "bytes": 151148
+    },
+    "documentation": "https://www.un4seen.com/doc/basswasapi/BASS_WASAPI_Init.html",
+    "dllSha256": "6f0869c11431e01f759fbe1cd6080299c833c519eb8ab1feae12106907b1fbd1"
+  },
+  "tabler": {
+    "repository": "tabler/tabler-icons",
+    "revision": "a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d",
+    "files": {
+      "icons/outline/repeat.svg": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/repeat.svg",
+        "sha256": "c018576502a5f4c2e3738d5537ef514ceb88ace4ae3b3b85ce98fe7eebcbc711",
+        "bytes": 457
+      },
+      "icons/outline/repeat-once.svg": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/repeat-once.svg",
+        "sha256": "e6054cfd9523434fcef087f2453c025d2df05ecd4d99391b53efcc776bc779f9",
+        "bytes": 470
+      },
+      "icons/outline/repeat-off.svg": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/repeat-off.svg",
+        "sha256": "22dff027ae9098afbb04330fc365cca174e3e6b2d1d59c601c43f0893fac5be4",
+        "bytes": 584
+      },
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/LICENSE",
+        "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db",
+        "bytes": 1073
+      },
+      "icons/outline/player-eject.svg": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/player-eject.svg",
+        "sha256": "92fe371d382916244fbd8c3ee46a96d2344a74fda0a4f79e3ad6fb27868f2cbd",
+        "bytes": 472
+      },
+      "icons/outline/disc.svg": {
+        "url": "https://raw.githubusercontent.com/tabler/tabler-icons/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/disc.svg",
+        "sha256": "43ec9c2ff25ae3509c6725537329e247a3a8576e8b9b0205a6f51e6ddcd37b39",
+        "bytes": 521
+      }
+    }
+  },
+  "kenneyInputPrompts": {
+    "website": "https://kenney.nl/assets/input-prompts",
+    "license": "CC0 1.0",
+    "archive": {
+      "url": "https://kenney.nl/media/pages/assets/input-prompts/8de120163f-1783763952/kenney_input-prompts_1.5.zip",
+      "sha256": "ac2fcf599080b0f3ba2d174c9474db6df1a0e96ff0662580e2da79a122ab78a1",
+      "bytes": 5070075
+    },
+    "licenseSha256": "ca2f58f80f903512119da5828868199478119818cd7ecffb303d625cb74cbb5a",
+    "icons": {
+      "playstation_button_cross_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_button_cross_outline.svg",
+        "originalSha256": "bd861ae29336011eca5ffddc0622ba936bd1ad721e32a8dba04450f2c22299a9",
+        "runtimeSha256": "e8bd3ad24a7e05b9dbdaed0078eb8fab1786878e250fa696f676098640e42f23"
+      },
+      "playstation_button_circle_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_button_circle_outline.svg",
+        "originalSha256": "ae89d8b6fcce6abf720795aa31c8000b4ba51b6f0674f33c3f415a677484b592",
+        "runtimeSha256": "789c13b9c48a08a0e06311bd27fe4cbb66198a4e333746dd0c5fa573d8dcf832"
+      },
+      "playstation_button_square_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_button_square_outline.svg",
+        "originalSha256": "0771443cba075eb5319e2c70fe5e7a3f5d6ce254ec9496305728d71a60d21589",
+        "runtimeSha256": "453c07608e276dbddfd5f22a4e604862700237fc0444d38737be9faaf344c614"
+      },
+      "playstation_button_triangle_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_button_triangle_outline.svg",
+        "originalSha256": "dc52cd4b312b6acd8f21718674d803ae6dc19aae116c7b1484e0be3f60d40afc",
+        "runtimeSha256": "abc8e1fe15c85a392207fae8e57eef25bce008ea2ef2447385ea79ecbbdf9750"
+      },
+      "playstation_trigger_l1_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_trigger_l1_outline.svg",
+        "originalSha256": "b3cfc5d2ccaf289c7ae3c20d8348a549f8723bf7305560db35e0584468ed9188",
+        "runtimeSha256": "9c05e25b08c41e99e779ccc8e51daafb0c47faaa5bc72caf6ef4619dd9e768b8"
+      },
+      "playstation_trigger_r1_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation_trigger_r1_outline.svg",
+        "originalSha256": "727219e6900ccf30c5831832e4fac2827ef71ca0e7a93d70d9601fcb76703ea9",
+        "runtimeSha256": "f97e79745da02ed3976ca15fabc6f855a944075d220eafb3ae959f78761bb537"
+      },
+      "playstation_dpad_all": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_all.svg",
+        "originalSha256": "57c48a1b28a72a2b0579a14b072a43c71fe59e6e27a9343ce21636cc2ca06e3b",
+        "runtimeSha256": "5c0fd49a0be110906df530a0d46c6426c03a48c96f521405c161c91b65abe2f5"
+      },
+      "playstation_dpad_up": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_up.svg",
+        "originalSha256": "e61c695f420ac22fc860b764a1527e0cf2bfd6e38162731c001bfe9121a7a0a8",
+        "runtimeSha256": "05602e8c85e198fac3645db36a86f5f431983d3125d53a2993044d130eb182ae"
+      },
+      "playstation_dpad_down": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_down.svg",
+        "originalSha256": "c06abfab82a6e264f4f62c546922afe6f53619bbdfae699baa9d599677093ac3",
+        "runtimeSha256": "9dff07ef2db0f39a350f7ca58b167f9f6c4ddb5248932f3e6a863e998fd46b43"
+      },
+      "playstation_dpad_left": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_left.svg",
+        "originalSha256": "5c81b1632941d5d297c282750f4ed4587ac3a277527df56604b8b2bf04526d7a",
+        "runtimeSha256": "9363103ded09fc659493a71fb33cbf8e24bd47acbc504ad8ff2e88c6a12be128"
+      },
+      "playstation_dpad_right": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_right.svg",
+        "originalSha256": "32d64ec2639ef291983daba2c3eb5eae6722a5fa0289737d049a12d6275f622a",
+        "runtimeSha256": "b43d00b495b4862e410c95c7a30452cbdff72ba4588bf63699c9b97d14ab9a5a"
+      },
+      "playstation_dpad_vertical": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_vertical.svg",
+        "originalSha256": "ae55eaefcd14121da490887b75928077b412fc4444ab08a37e2a511f0ed53660",
+        "runtimeSha256": "81f0dc1ab8dddbb8a2ad266d122427c92020161cad1bf87dc26c73016909d3b4"
+      },
+      "playstation_dpad_horizontal": {
+        "archivePath": "PlayStation Series/Vector/playstation_dpad_horizontal.svg",
+        "originalSha256": "8c1aa78f9f5331f9d1801c7beb787b1f55b033b8690762f9ab3b094e3d0124f4",
+        "runtimeSha256": "9076d4151c49d216f3505224e446f5b6975198e5d258b3e79af42f38f0249778"
+      },
+      "playstation_stick_l": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l.svg",
+        "originalSha256": "c5097b1eab526cddc799ae77a6bf8d29b759408be2420357ba85b7441d6430e2",
+        "runtimeSha256": "e42c0c3cb52ae9fd5a41368a2dc84121877a49eaffe5e96c67f1f6790285108d"
+      },
+      "playstation_stick_l_up": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l_up.svg",
+        "originalSha256": "5ea179c3f935a56f803e8a9f60f5df3923df09e5fe402d30b113163386acc0dc",
+        "runtimeSha256": "7d4db52cac05cb088ecdf984e4f5baca4cb77bc4373a902a8fa53a21ae18f270"
+      },
+      "playstation_stick_l_down": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l_down.svg",
+        "originalSha256": "13de31bfa7da016522e9cbd26cb080abec3f6dfe6fe348c4b84fc07dd5457b4a",
+        "runtimeSha256": "ff0a2a5dac7d271a11d1f9d0417e75f3c5a5967bbbdbf1d81e6fb0a0171db3c1"
+      },
+      "playstation_stick_l_left": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l_left.svg",
+        "originalSha256": "35e8257c7de6c1e030b63a1db3ccf7ccd6b9332c323820ec0dc36f4213a0c085",
+        "runtimeSha256": "255220d990e3f3d3b825a4ab2ee876cefa6c4451b4ed08e8f70e7f75c81f6f40"
+      },
+      "playstation_stick_l_right": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l_right.svg",
+        "originalSha256": "92b4626e9b3bbcfe9d7ea7f5e264612d357c3d03c7b07260801924f6a302c1ac",
+        "runtimeSha256": "93e2bd4e4004eabad474529e1579db3907d4e981f5a86d240ef75fe73bba8578"
+      },
+      "playstation_stick_l_press": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_l_press.svg",
+        "originalSha256": "074541e658eb04c1084b3281d8dfe51ef5dd31fa1c6f8e8e6377f920637bbbcb",
+        "runtimeSha256": "1f9fe6d147dd8c9848ac6bb791573b040846801ff8f3fde5d47ce14c83254d4c"
+      },
+      "playstation_stick_r": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r.svg",
+        "originalSha256": "c8ba98ac6b7793d1033a230df73f9b51f9ba2205ec15febcc481597c165c0b65",
+        "runtimeSha256": "6743336251cea97ff6b67e9f9001253da67b51118539a6696aae75cdecb9beeb"
+      },
+      "playstation_stick_r_up": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r_up.svg",
+        "originalSha256": "7604bc777371b3418b46baaeb0f5eef05a83cb842d16ceb11d983765e8fe7b1b",
+        "runtimeSha256": "34381c5cff5cf59d975bac84824221fe10df0f6bc8563eb9dfb73d70ef3fe84a"
+      },
+      "playstation_stick_r_down": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r_down.svg",
+        "originalSha256": "b7c8a4d8a0e9acb0b8555fa87e08d415fd33cd3faec19100e561e8cd2f4100ff",
+        "runtimeSha256": "9fe2b8ec6b7f605d67b26db634d354e7d5bb01a614e76b3405cd6f9a9d9a6df0"
+      },
+      "playstation_stick_r_left": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r_left.svg",
+        "originalSha256": "a2cb2efcb6074d5f71ccb87369f8bc79619238bd01e707daa44ee1a2554c2bf4",
+        "runtimeSha256": "a0b32ddb159683e702235ff67c29f5bedd0d5e72176183f90448d6b6304046c3"
+      },
+      "playstation_stick_r_right": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r_right.svg",
+        "originalSha256": "545da69ee3ab8c8b22820406de942dfffd709c36a95bb634e12d5719866cee15",
+        "runtimeSha256": "55424fef5734d5c9b5b2cf752c7725862ba4e9437e4eb1b191b621c5129df47a"
+      },
+      "playstation_stick_r_press": {
+        "archivePath": "PlayStation Series/Vector/playstation_stick_r_press.svg",
+        "originalSha256": "1f17890ab137d84c44eacaaf56ffa861ba7107b709926427218f4c4743024c0f",
+        "runtimeSha256": "a64ff106a31943d4f8d5e264c3444245fb775b04a8812534d0d1051750c71cbf"
+      },
+      "playstation4_button_options_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation4_button_options_outline.svg",
+        "originalSha256": "8cd90ace8e17fcb8d0900c8d1238d8cd873bf204dbaa2a8044cf1bebc6113dfa",
+        "runtimeSha256": "bd1e040e7f273acd2c2f0b759a389cee3e9392366a2d37e71e92a6d4e8a7cb47"
+      },
+      "playstation5_button_options_outline": {
+        "archivePath": "PlayStation Series/Vector/playstation5_button_options_outline.svg",
+        "originalSha256": "9a5fd0cd08cc1bfd9a64bfdb2611b92f873c44a73f0f2ff9f6dbd41310f5403c",
+        "runtimeSha256": "2171b012eb7a868bfba87a3c098f59569710ea5fa9962e2f5dc3ad172cd4de10"
+      },
+      "playstation4_touchpad_press_left": {
+        "archivePath": "PlayStation Series/Vector/playstation4_touchpad_press_left.svg",
+        "originalSha256": "932fd493c5f22d9a6026bbf3c10cdf2eb623544002edd1efe7a6ba3403dfb08a",
+        "runtimeSha256": "3d7610e7bedca82f9cc5b89f437ccb436fd8e828c430a0fed0308ce071da4941"
+      },
+      "playstation4_touchpad_press_center": {
+        "archivePath": "PlayStation Series/Vector/playstation4_touchpad_press_center.svg",
+        "originalSha256": "656e43e91ce5b93bd0e2bf12d1d0033ea993986ad5e0859c111ad047c43e104e",
+        "runtimeSha256": "f55d425a455a6962be4a60e48e60a9c889afd6d56ebd5435bacc19f5db016e4f"
+      },
+      "playstation4_touchpad_press_right": {
+        "archivePath": "PlayStation Series/Vector/playstation4_touchpad_press_right.svg",
+        "originalSha256": "4816fd4d8a7a17240370948ee4ac6b2be8980c8db0d8fb70d4d17101c4e70570",
+        "runtimeSha256": "13a527948e99da60dc9620f8b1f334b352e73909533ce165e41ef8787386cb80"
+      },
+      "playstation5_touchpad_press_left": {
+        "archivePath": "PlayStation Series/Vector/playstation5_touchpad_press_left.svg",
+        "originalSha256": "f913018e4cfe39eea1cd209d1453ca1c404962bb5c6995907c2a237e4bb4962e",
+        "runtimeSha256": "55faa55054e9c4e51834f2e96d7c9bb377ede7b21d68eb55b451fa8008096a39"
+      },
+      "playstation5_touchpad_press_center": {
+        "archivePath": "PlayStation Series/Vector/playstation5_touchpad_press_center.svg",
+        "originalSha256": "2b1fcaaadc7c8f676bfc0b418090f3349efd704005d96585cad7378132387b97",
+        "runtimeSha256": "32fb5a065785a37b4b82162fd6ccba747bd2e70be6b9fcc04ed0238ab2fc77ee"
+      },
+      "playstation5_touchpad_press_right": {
+        "archivePath": "PlayStation Series/Vector/playstation5_touchpad_press_right.svg",
+        "originalSha256": "ed53b6ebd4169cc1000ff61f49e600e081ae795493e326ff15b7bc2d8f5dc8e4",
+        "runtimeSha256": "07151650a1427a790c5981f85e241765d301ab9cdff61210f3bb2e81c08f74e5"
+      },
+      "xbox_button_a_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_button_a_outline.svg",
+        "originalSha256": "d4e5a26168d9ca3cc5f880befea9cc851359f410d6582ea7397e0da51a08c685",
+        "runtimeSha256": "e1134a2676a45fc5c357bf044abb1b4b4a2a7263735942c6bec85216e9bbafe7"
+      },
+      "xbox_button_b_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_button_b_outline.svg",
+        "originalSha256": "ff2dff9ca5f8ef0e9d7f32ce97f83db807b7a67679d914c10ef0b5aaaf845f75",
+        "runtimeSha256": "35db955b0104f46012c5eacc42c0c88a82d58d42c376aec5cbc82a8260383850"
+      },
+      "xbox_button_x_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_button_x_outline.svg",
+        "originalSha256": "025d0ba752f08e010ebc8eec4970f0a9b85143f971626547059bab43da75e640",
+        "runtimeSha256": "6679390fa65dd5db2344a5e86a9883fb50a886c9602acb4efeb2a00022048cb6"
+      },
+      "xbox_button_y_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_button_y_outline.svg",
+        "originalSha256": "86bb6b4010c8c9266d3dde3c2d6652e40af295b6a40dd2a3fc9d33fdd1f85d46",
+        "runtimeSha256": "780919478cbfc4c1e7fe2dc064178a1f2b4587c07d22ac4c131f06eaf0545bc4"
+      },
+      "xbox_button_menu_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_button_menu_outline.svg",
+        "originalSha256": "b3452fb97956b9d4621f117a4531e88d52d90595f96a12caa4e369972e733059",
+        "runtimeSha256": "72e074947b42d3fd64e36d74196133f81fac09ba89b0a30f45100b7f459a1236"
+      },
+      "xbox_lb_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_lb_outline.svg",
+        "originalSha256": "8646bcb49937539bb150f5f6713448dcae0bfdedc27ffd6e16767cb16f15211a",
+        "runtimeSha256": "a037f6face86bb297f4654575fa7cd95f6002eac08245820cd7dd05f12eb473e"
+      },
+      "xbox_rb_outline": {
+        "archivePath": "Xbox Series/Vector/xbox_rb_outline.svg",
+        "originalSha256": "c18817fc50574852e77826d07764f3f33a7a8f0897782f9f5020a486e8954456",
+        "runtimeSha256": "d61ba086ac5e22d5db5dd1435543a056c532149c442f0ad6cdc251c410bb553e"
+      },
+      "xbox_dpad_all": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_all.svg",
+        "originalSha256": "4d2a5c8514420a260df791079f45d17f8e909ef939f2209fed8e37aad83a094a",
+        "runtimeSha256": "2be7a7e912313066c44931597ae57a7c6210d9ea6a678b77c58ad96c349b233e"
+      },
+      "xbox_dpad_up": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_up.svg",
+        "originalSha256": "1eb952dcac0a986a5ab4f5cf61ee832504554cdc2df46b20dc0998a91b70e25b",
+        "runtimeSha256": "f49b073681f1bbb5efdcf57a5c1ed3b7ccf137f9b6628bbc467e0d4c0bf3faaa"
+      },
+      "xbox_dpad_down": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_down.svg",
+        "originalSha256": "d7a0d403e36c41120882f5713927e828794cdff93f88f8d3cbea3d8384b322c9",
+        "runtimeSha256": "62b6362e12bc306fd1a1a4bd11f922005f8c55b3596eb9f9b91078546ec42f2c"
+      },
+      "xbox_dpad_left": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_left.svg",
+        "originalSha256": "6fc565008a474f3c3899cc97854947a51700ce925523bf155ba77e7c28c658f6",
+        "runtimeSha256": "9aa20472efc56f6484e20d137817b08c778221152229228f52cac63ba8df6c2c"
+      },
+      "xbox_dpad_right": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_right.svg",
+        "originalSha256": "5e3e358a70aaa5ea7236aef3504491051af91847466c349965cc345dd5b7dcb0",
+        "runtimeSha256": "4d3c28d3c4170f22ff07cd9ddc07c323b50438f8527ea52aa54ff98ac1e4f34d"
+      },
+      "xbox_dpad_vertical": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_vertical.svg",
+        "originalSha256": "c880bf479bb69bd2aa126220f9c9b0967780ac558eb59080618d7e2b8bb15565",
+        "runtimeSha256": "3571c9d98fa20f05863a34457f25a7e288c2fce3d0c92cd4620dc695f8f34e63"
+      },
+      "xbox_dpad_horizontal": {
+        "archivePath": "Xbox Series/Vector/xbox_dpad_horizontal.svg",
+        "originalSha256": "7dfc37399407392f40eb8b0e048b14cdc603f8c3612183bce7dc8b9f3dd5df9e",
+        "runtimeSha256": "063c040358d163135f983ed48f8d54eef47e9fc7c804aa863697ac62cdff4337"
+      },
+      "xbox_stick_l": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l.svg",
+        "originalSha256": "c5097b1eab526cddc799ae77a6bf8d29b759408be2420357ba85b7441d6430e2",
+        "runtimeSha256": "e42c0c3cb52ae9fd5a41368a2dc84121877a49eaffe5e96c67f1f6790285108d"
+      },
+      "xbox_stick_l_up": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l_up.svg",
+        "originalSha256": "5ea179c3f935a56f803e8a9f60f5df3923df09e5fe402d30b113163386acc0dc",
+        "runtimeSha256": "7d4db52cac05cb088ecdf984e4f5baca4cb77bc4373a902a8fa53a21ae18f270"
+      },
+      "xbox_stick_l_down": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l_down.svg",
+        "originalSha256": "13de31bfa7da016522e9cbd26cb080abec3f6dfe6fe348c4b84fc07dd5457b4a",
+        "runtimeSha256": "ff0a2a5dac7d271a11d1f9d0417e75f3c5a5967bbbdbf1d81e6fb0a0171db3c1"
+      },
+      "xbox_stick_l_left": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l_left.svg",
+        "originalSha256": "35e8257c7de6c1e030b63a1db3ccf7ccd6b9332c323820ec0dc36f4213a0c085",
+        "runtimeSha256": "255220d990e3f3d3b825a4ab2ee876cefa6c4451b4ed08e8f70e7f75c81f6f40"
+      },
+      "xbox_stick_l_right": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l_right.svg",
+        "originalSha256": "92b4626e9b3bbcfe9d7ea7f5e264612d357c3d03c7b07260801924f6a302c1ac",
+        "runtimeSha256": "93e2bd4e4004eabad474529e1579db3907d4e981f5a86d240ef75fe73bba8578"
+      },
+      "xbox_stick_l_press": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_l_press.svg",
+        "originalSha256": "074541e658eb04c1084b3281d8dfe51ef5dd31fa1c6f8e8e6377f920637bbbcb",
+        "runtimeSha256": "1f9fe6d147dd8c9848ac6bb791573b040846801ff8f3fde5d47ce14c83254d4c"
+      },
+      "xbox_stick_r": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r.svg",
+        "originalSha256": "c8ba98ac6b7793d1033a230df73f9b51f9ba2205ec15febcc481597c165c0b65",
+        "runtimeSha256": "6743336251cea97ff6b67e9f9001253da67b51118539a6696aae75cdecb9beeb"
+      },
+      "xbox_stick_r_up": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r_up.svg",
+        "originalSha256": "7604bc777371b3418b46baaeb0f5eef05a83cb842d16ceb11d983765e8fe7b1b",
+        "runtimeSha256": "34381c5cff5cf59d975bac84824221fe10df0f6bc8563eb9dfb73d70ef3fe84a"
+      },
+      "xbox_stick_r_down": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r_down.svg",
+        "originalSha256": "b7c8a4d8a0e9acb0b8555fa87e08d415fd33cd3faec19100e561e8cd2f4100ff",
+        "runtimeSha256": "9fe2b8ec6b7f605d67b26db634d354e7d5bb01a614e76b3405cd6f9a9d9a6df0"
+      },
+      "xbox_stick_r_left": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r_left.svg",
+        "originalSha256": "a2cb2efcb6074d5f71ccb87369f8bc79619238bd01e707daa44ee1a2554c2bf4",
+        "runtimeSha256": "a0b32ddb159683e702235ff67c29f5bedd0d5e72176183f90448d6b6304046c3"
+      },
+      "xbox_stick_r_right": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r_right.svg",
+        "originalSha256": "545da69ee3ab8c8b22820406de942dfffd709c36a95bb634e12d5719866cee15",
+        "runtimeSha256": "55424fef5734d5c9b5b2cf752c7725862ba4e9437e4eb1b191b621c5129df47a"
+      },
+      "xbox_stick_r_press": {
+        "archivePath": "Xbox Series/Vector/xbox_stick_r_press.svg",
+        "originalSha256": "1f17890ab137d84c44eacaaf56ffa861ba7107b709926427218f4c4743024c0f",
+        "runtimeSha256": "a64ff106a31943d4f8d5e264c3444245fb775b04a8812534d0d1051750c71cbf"
+      }
+    }
+  }
+}

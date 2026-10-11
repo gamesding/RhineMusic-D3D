@@ -1,0 +1,154 @@
+{
+  "packagePayloadSha256": "6eceb6e0f4e800cae01a3e68216e7c95624380d91bc5934fb7c237cf2079ac90",
+  "exeSha256": "8da454c9b8cc023768c039f3329c32b596af58ce18fd32a1c1c29f63ed1380e0",
+  "syntheticOnly": true,
+  "captures": [
+    {
+      "file": "docs/media/browse-day.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "view": "browse",
+      "theme": "day",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "fa003d8bfd5dc8c064b4a842d65d8b5d4b9be3831f2e34063e2a88a972a8a7fa",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/browse-night.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "view": "browse",
+      "theme": "night",
+      "api": "Direct3D 12",
+      "upscaler": "NVIDIA DLSS Super Resolution 310.9.1",
+      "sha256": "c49c421a1559860944ade342c6ea157b6ec4b3629dfd339d569beb060890c695",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/album-hires-night.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "audio-tech",
+      "view": "detail",
+      "theme": "night",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "2dd129c91e02f3e70c547618300d88b9f79aed7acec8fa9dc317dc21b0a2a759",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/dsd-night.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "audio-tech",
+      "view": "dsd-detail",
+      "theme": "night",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "347c19e08f468116af87b43b0968b238b046d55c8cf0a2ff46a97d753be90f89",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/playback-night.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "theme": "night",
+      "api": "Direct3D 11",
+      "sha256": "2e9d8de6da66147c718f12274c201da50235f1aaa01995d2da2d77bfd2a7bf70",
+      "syntheticLibrary": true,
+      "sourceScenario": "controller-tracks"
+    },
+    {
+      "file": "docs/media/search-day.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "search-ui",
+      "view": "search",
+      "theme": "day",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "d7df39cbea7afa88d2a49e32bb926ff0365799924a8da8f3b01d1fb6f6c5c1f7",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/library-day.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "view": "library",
+      "theme": "day",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "7019f6fcc439134d5a6eeb99ba47dd92b60232ea8ffc1e2bbd56c547886c4cc0",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/settings-day.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "view": "settings",
+      "theme": "day",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "9d4231fa954c61f1597f0d852e6b1020d6be17df1c84fcfb2ace5442d3f1624d",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/controller-help.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "parity",
+      "view": "controller-help",
+      "theme": "night",
+      "api": "Direct3D 11",
+      "upscaler": "native",
+      "sha256": "0b1825f6066d5aceb0776f38af73c16956151d89a9dc821626d51a4bdfb36f18",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    },
+    {
+      "file": "docs/media/cd-raytracing.png",
+      "size": [
+        1600,
+        900
+      ],
+      "fixture": "cd-media",
+      "theme": "day",
+      "api": "Direct3D 12",
+      "reflections": "rtx",
+      "sha256": "53df3861619965257dcbfbe5a75bbe2f361b91b67f64814a27b70a0dca090e2b",
+      "syntheticLibrary": true,
+      "debugErrors": 0
+    }
+  ]
+}

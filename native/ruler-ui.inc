@@ -1,0 +1,12 @@
+void Ui::drawRuler(float center,float y){
+    std::vector<int> items;std::string group;auto files=model_->library.value("columnFiles",json::array());auto albums=model_->library.value("albums",json::array());
+    for(size_t lane=0;lane<files.size();++lane){auto candidate=files[lane].get<std::vector<int>>();if(std::find(candidate.begin(),candidate.end(),model_->selected)==candidate.end())continue;items=std::move(candidate);group=std::to_string(lane);for(int index:items)if(index>=0&&index<int(albums.size()))group+="|"+albums[index].value("id","");break;}
+    int direction=0;if(rulerNavigationSerial_!=model_->navigationSerial){rulerNavigationSerial_=model_->navigationSerial;direction=model_->rowNavigation;}
+    const float left=center-float(ruler_.width.value)*.5f;int hovered=INT_MIN,focused=INT_MIN;for(const auto& slot:ruler_.slots){if(contains({left+float(slot.x)-float(ruler_.gap)*.5f,y,left+float(slot.x+ruler_.tickWidth+ruler_.gap*.5),y+float(ruler_.fullHeight)},pointerX_,pointerY_))hovered=slot.ordinal;if(focus_=="ruler-"+std::to_string(slot.ordinal))focused=slot.ordinal;}
+    ruler_.update(std::move(items),model_->selected,group,direction,model_->now,frameDt_,model_->preferences.value("reduced",false),width_<700,hovered,focused);
+    rulerRect_={center-float(ruler_.width.value)*.5f,y,center+float(ruler_.width.value)*.5f,y+float(ruler_.fullHeight)};auto drawing=renderer_->drawing();drawing->PushAxisAlignedClip(rulerRect_,D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
+    for(const auto& slot:ruler_.slots){const float x=rulerRect_.left+float(slot.x),height=float(slot.height.value);const auto rect=D2D1::RectF(x-float(ruler_.gap)*.5f,y,x+float(ruler_.tickWidth+ruler_.gap*.5),y+float(ruler_.fullHeight));float edge=1;if(ruler_.overflows())edge=float(std::clamp(std::min(slot.x+ruler_.tickWidth*.5,ruler_.width.value-slot.x-ruler_.tickWidth*.5)/ruler_.gap,0.,1.));auto paint=slot.ordinal==hovered&&slot.ordinal!=ruler_.selectedOrdinal?accent_:ink_;paint.a*=float(slot.presence.value*slot.opacity.value)*edge;fill({x,y+float(ruler_.fullHeight)*.5f-height*.5f,x+float(ruler_.tickWidth),y+float(ruler_.fullHeight)*.5f+height*.5f},paint);
+        if(slot.visible){auto key="ruler-"+std::to_string(slot.ordinal);hits_.push_back({key,"navigate",{{"row",slot.ordinal-ruler_.selectedOrdinal}},rect,false,""});if(focus_==key){brush_->SetColor(accent_);drawing->DrawRectangle(rect,brush_.Get(),1);}}
+    }
+    drawing->PopAxisAlignedClip();
+}

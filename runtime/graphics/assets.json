@@ -1,0 +1,10 @@
+{
+  "nvngx_dlss.dll": {
+    "sha256": "3975567b8943c53acce397f2b72380092f84f162d00b0d2c7d08a1025c563983",
+    "source": "vendor/dlss/lib/Windows_x86_64/rel/nvngx_dlss.dll"
+  },
+  "amd_fidelityfx_upscaler_dx12.dll": {
+    "sha256": "d0dcccc74a43c44ba435b7a369b456e0970d8a4464e4bd683119b374f2c9fb46",
+    "source": "vendor/fsr/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll"
+  }
+}

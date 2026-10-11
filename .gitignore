@@ -1,0 +1,38 @@
+# Generated builds and single-file output (the output EXE exceeds GitHub's file limit).
+/build/
+/build-tools/node_modules/
+/upstream/node_modules/
+/RhineMusic.exe
+/RhineMusicD3D.exe
+/RhineDeviceProbe.exe
+/RhineGraphicsProbe.exe
+/backend/original-core.mjs
+/runtime/vendor/audio/windows-x64/rhine-audio-host.exe
+/runtime/vendor/audio/windows-x64/assets.json
+/shaders/compiled/
+/.cache/
+/.vs/
+/.idea/
+__pycache__/
+*.pyc
+*.pdb
+*.obj
+*.exp
+*.ilk
+*.log
+*.blend1
+*.blend2
+# Music, covers, settings, network secrets and processing caches are never source.
+music-data/
+music-data-v3/
+cover-cache/
+sony-pcm-cache/
+preferences.json
+config.json
+library-index.json
+.env
+.env.*
+!.env.example
+Thumbs.db
+.DS_Store
+# Required vendor DLL/EXE/LIB and the offline dependency ZIP remain tracked.

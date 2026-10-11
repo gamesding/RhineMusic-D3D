@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {promises as fs} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {randomUUID,createHash} from 'node:crypto';
+import {silentWav,dsdFixture} from '../upstream/scripts/audio-fixtures.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),directory=path.join(root,'.cache/asio-playback');await fs.mkdir(directory,{recursive:true});
+const runtime=process.env.RHINE_TEST_RUNTIME_JSON?JSON.parse(process.env.RHINE_TEST_RUNTIME_JSON):path.join(root,'runtime');
+const {NativeOutput}=await import(new URL('scripts/native-output.mjs',new URL('file:///'+runtime.replaceAll('\\','/')+'/')));
+const files=new Map();for(const rate of [192000,384000]){const filename=path.join(directory,'synthetic-pcm-'+rate+'.wav');await fs.writeFile(filename,silentWav(3,rate,24));files.set('pcm-'+rate,filename);}
+for(const rate of [2822400,5644800,11289600]){const filename=path.join(directory,'synthetic-silent-dsd-'+rate+'.dsf'),fixture=dsdFixture(rate,Math.ceil(rate*3/8));fixture.dsf.fill(0x69,92);await fs.writeFile(filename,fixture.dsf);files.set('dsd-'+rate,filename);}
+const executable=path.join(runtime,'vendor/audio/windows-x64/rhine-audio-host.exe');
+const host=new NativeOutput({executable,store:{trackFile:id=>({path:files.get(id),allowedRoot:directory})}}),report={checks:[],syntheticSourcesOnly:true,packagedRuntime:!!process.env.RHINE_TEST_RUNTIME_JSON,nativeHostSha256:createHash('sha256').update(await fs.readFile(executable)).digest('hex')};const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+try{const status=await host.status();assert.equal(status.available,true);const driver=status.devices.find(device=>device.name==='FiiO ASIO Driver');assert(driver,'The connected FiiO driver was not enumerated');report.driver=driver.name;report.capabilities=await host.command({cmd:'capabilities',device:driver.id});
+for(const [mode,rate] of [['pcm',192000],['pcm',384000],['native',2822400],['native',5644800],['native',11289600],['dop',2822400],['dop',5644800]]){const session=randomUUID(),settings={backend:'asio',device:driver.id,channel:0,dsdMode:mode};const opened=await host.start({session,trackId:(mode==='pcm'?'pcm-':'dsd-')+rate,settings,volume:0,position:0});assert.equal(opened.paused,true);assert.equal(opened.sampleRate,mode==='dop'?rate/16:rate);await host.control({session,action:'play'});await sleep(500);const playing=await host.control({session,action:'status'});assert.equal(playing.playing,true);assert(playing.position>0);assert.equal(playing.error,'');const paused=await host.control({session,action:'pause'});await sleep(80);const still=await host.control({session,action:'status'});assert(Math.abs(still.position-paused.position)<.03);await host.control({session,action:'seek',position:1.2});const moved=await host.control({session,action:'status'});assert(Math.abs(moved.position-1.2)<.05);if(mode!=='pcm')assert.equal(moved.volumeLocked,true);await host.control({session,action:'play'});await sleep(150);await host.stopCurrent();report.checks.push({mode,sourceRate:rate,sampleRate:opened.sampleRate,playPauseSeekStop:true});}
+await assert.rejects(host.start({session:randomUUID(),trackId:'dsd-11289600',settings:{backend:'asio',device:driver.id,channel:0,dsdMode:'dop'},volume:0,position:0}));await host.stopCurrent();
+const session=randomUUID();await host.start({session,trackId:'pcm-192000',settings:{backend:'asio',device:driver.id,channel:0,dsdMode:'pcm'},volume:0,position:0});await host.control({session,action:'play'});await sleep(150);assert.equal((await host.control({session,action:'status'})).playing,true);await host.stopCurrent();report.checks.push({unsupportedDop256Rejected:true,pcmRecoveryAfterRejection:true});
+report.ok=true;
+}catch(error){report.ok=false;report.error=error.message;throw error;}
+finally{await host.stopCurrent().catch(()=>{});host.close();await fs.writeFile(path.join(root,'build/asio-playback.json'),JSON.stringify(report,null,2));}console.log(JSON.stringify(report,null,2));

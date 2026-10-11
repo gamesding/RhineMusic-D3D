@@ -1,2 +1,16 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Keep required vendor/runtime binaries byte-for-byte.
+*.dll binary
+*.lib binary
+*.exe binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.blend binary
+*.glb binary
+*.pdf binary
+*.cso binary

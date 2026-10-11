@@ -1,0 +1,19 @@
+{
+  "abiVersion": 1,
+  "architecture": "x64",
+  "sdkVersion": "libScePad 1.9",
+  "file": "rhine-pad-bridge.dll",
+  "sha256": "0c4eb4731d3d93838daa32d46bf30cc6ca9ea65c769fc2766d025c18e6c17aea",
+  "sourceDistributed": false,
+  "privateHeadersDistributed": false,
+  "license": "Sony Interactive Entertainment controller library license; see vendor/scepad/license; not MIT",
+  "features": [
+    "DualShock 4",
+    "DualSense",
+    "USB / Bluetooth",
+    "buttons",
+    "sticks",
+    "touch coordinates and touchpad click",
+    "compatible vibration"
+  ]
+}

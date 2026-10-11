@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {promises as fs} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {randomUUID,createHash} from 'node:crypto';
+import {silentWav} from '../upstream/scripts/audio-fixtures.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const runtime=process.env.RHINE_TEST_RUNTIME_JSON?JSON.parse(process.env.RHINE_TEST_RUNTIME_JSON):path.join(root,'runtime'),appRoot=path.dirname(runtime);
+const home=path.join(root,'.cache/repeat-playback',randomUUID()),music=path.join(home,'sources');
+for(const [album,tracks]of [['Album A',['01','02']],['Album B',['01']]]){await fs.mkdir(path.join(music,album),{recursive:true});for(const track of tracks)await fs.writeFile(path.join(music,album,track+'.wav'),silentWav(1.6,44100,24));}
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function service(){
+ const child=spawn(path.join(runtime,'node/node.exe'),[path.join(appRoot,'backend/entry.mjs')],{cwd:appRoot,env:{...process.env,RHINE_APP_HOME:home,MUSIC_DATA_DIR:path.join(home,'music-data'),RHINE_DEMO:'',RHINE_DEMO_FIXTURE:''},windowsHide:true,stdio:['pipe','pipe','pipe']});
+ let buffer='',counter=0,ready,errors='',player;const pending=new Map();
+ child.stderr.on('data',chunk=>errors+=chunk);
+ child.stdout.on('data',chunk=>{buffer+=chunk;let end;while((end=buffer.indexOf('\n'))>=0){const value=JSON.parse(buffer.slice(0,end));buffer=buffer.slice(end+1);if(value.event==='ready')ready=value;if(value.event==='player')player=value.player;if(value.id){const request=pending.get(value.id);if(request){clearTimeout(request.timer);pending.delete(value.id);value.ok?request.resolve(value.result):request.reject(new Error(value.error));}}}});
+ const call=(op,args={})=>new Promise((resolve,reject)=>{const id=++counter,timer=setTimeout(()=>{pending.delete(id);reject(new Error('RPC timeout: '+op));},30000);pending.set(id,{resolve,reject,timer});child.stdin.write(JSON.stringify({id,op,args})+'\n');});
+ return {child,call,get ready(){return ready;},get errors(){return errors;},get player(){return player;}};
+}
+const report={checks:[],syntheticSourcesOnly:true,volume:0,packagedRuntime:!!process.env.RHINE_TEST_RUNTIME_JSON,backendSha256:createHash('sha256').update(await fs.readFile(path.join(appRoot,'backend/original-core.mjs'))).digest('hex')};let rpc=service();
+async function until(condition,label,ms=15000){const end=Date.now()+ms;while(Date.now()<end){if(rpc.child.exitCode!==null)throw new Error('Backend exited: '+rpc.errors);const state=await rpc.call('state');if(condition(state))return state;await sleep(50);}throw new Error('Timeout: '+label+' '+JSON.stringify(await rpc.call('state')));}
+async function waitReady(){const end=Date.now()+30000;while(!rpc.ready){if(Date.now()>end||rpc.child.exitCode!==null)throw new Error('Startup failed '+rpc.errors);await sleep(50);}}
+async function shutdown(){if(rpc.child.exitCode===null){await rpc.call('shutdown');rpc.child.stdin.end();for(let i=0;i<200&&rpc.child.exitCode===null;i++)await sleep(25);assert.equal(rpc.child.exitCode,0);}}
+try{
+ await waitReady();await rpc.call('preferences',{volume:0,songFade:false,sony:{dsee:false,dc:0,vinyl:0},output:{backend:'wasapi',device:-1,channel:0,dsdMode:'pcm'}});
+ await rpc.call('request',{path:'/api/library/scan',body:{roots:[music]}});let state=await until(s=>s.library?.albums.filter(a=>a.tracks.some(t=>t.fileName?.endsWith('.wav'))).length===2||s.library?.albums.filter(a=>['Album A','Album B'].includes(a.title)).length===2,'isolated index');
+ const albums=state.library.albums.filter(a=>!a.cd),a=albums.find(a=>a.tracks.length===2),b=albums.find(a=>a.tracks.length===1);assert(a&&b);report.fixture={albums:albums.length,tracks:a.tracks.length+b.tracks.length};
+ const play=(album,track)=>rpc.call('play',{albumId:album.id,trackId:track.id});
+ await rpc.call('preferences',{repeatMode:'off'});await play(a,a.tracks[0]);await until(s=>s.player.currentTrack?.id===a.tracks[1].id&&s.player.playing,'off advances to next');await until(s=>s.player.transport==='idle','off stops at last');report.checks.push({name:'no repeat',naturalNext:true,lastStops:true});
+ await rpc.call('preferences',{repeatMode:'track'});await play(a,a.tracks[0]);state=await until(s=>s.player.playing&&s.player.nativeSessionId,'single starts');let session=state.player.nativeSessionId;
+ for(let i=0;i<2;i++){state=await until(s=>s.player.currentTrack?.id===a.tracks[0].id&&s.player.playing&&s.player.nativeSessionId!==session,'single natural restart');assert(state.player.currentTime<1.4);session=state.player.nativeSessionId;}
+ await rpc.call('next');await until(s=>s.player.currentTrack?.id===a.tracks[1].id&&s.player.playing,'manual next overrides single repeat');await rpc.call('stop');await sleep(1800);assert.equal((await rpc.call('state')).player.transport,'idle');report.checks.push({name:'single repeat',twoNaturalRestarts:true,manualNext:true,stopDoesNotRestart:true});
+ await rpc.call('preferences',{repeatMode:'album'});await play(a,a.tracks[1]);await until(s=>s.player.currentTrack?.id===a.tracks[0].id&&s.player.playing,'album wraps last to first');await until(s=>s.player.currentTrack?.id===a.tracks[1].id&&s.player.playing,'album advances to second');await until(s=>s.player.currentTrack?.id===a.tracks[0].id&&s.player.playing,'album wraps again');report.checks.push({name:'album repeat',orderPreserved:true,twoWraps:true,otherAlbumNotPlayed:true});
+ await rpc.call('stop');await play(b,b.tracks[0]);state=await until(s=>s.player.playing,'one-track album starts');session=state.player.nativeSessionId;await until(s=>s.player.currentTrack?.id===b.tracks[0].id&&s.player.playing&&s.player.nativeSessionId!==session,'one-track album repeats');await rpc.call('preferences',{repeatMode:'off'});await until(s=>s.player.transport==='idle','disable repeat during playback');report.checks.push({name:'single-track album and live mode change',naturalRestart:true,disableStopsAtEnd:true});
+ const native=await rpc.call('request',{path:'/api/native/status'}),endpoint=native.wasapiDevices.find(d=>d.enabled&&/FiiO/i.test(d.name));assert(endpoint,'Connected FiiO WASAPI endpoint missing');
+ await rpc.call('preferences',{repeatMode:'track',output:{backend:'wasapi-exclusive',device:-1,channel:0,dsdMode:'pcm',wasapiDeviceId:endpoint.endpointId}});await play(a,a.tracks[0]);state=await until(s=>s.player.playing&&s.player.nativeSessionId,'exclusive repeat starts');session=state.player.nativeSessionId;await until(s=>s.player.playing&&s.player.nativeSessionId!==session&&s.player.currentTrack?.id===a.tracks[0].id,'exclusive repeat after real EOF');await rpc.call('stop');report.checks.push({name:'exclusive output repeats after real EOF',device:endpoint.name,reacquiresEndpoint:true});
+ await rpc.call('preferences',{repeatMode:'track',sony:{dsee:false,dc:1,vinyl:0},output:{backend:'wasapi',device:-1,channel:0,dsdMode:'pcm'}});await play(a,a.tracks[0]);state=await until(s=>s.player.playing&&s.player.nativeSessionId,'Sony repeat starts',30000);session=state.player.nativeSessionId;state=await until(s=>s.player.playing&&s.player.nativeSessionId!==session&&s.player.currentTrack?.id===a.tracks[0].id,'Sony repeat after real EOF',30000);assert.equal(state.player.sonySettings.dc,1);await rpc.call('stop');report.checks.push({name:'original Sony processing retains repeat',dcPhaseEnabled:true,naturalRestart:true});
+ await rpc.call('preferences',{repeatMode:'album',sony:{dsee:false,dc:0,vinyl:0}});await shutdown();rpc=service();await waitReady();state=await rpc.call('state');assert.equal(state.preferences.repeatMode,'album');assert.equal(state.player.repeatMode,'album');assert.equal(state.player.transport,'idle');await rpc.call('preferences',{repeatMode:'invalid'});assert.equal((await rpc.call('state')).preferences.repeatMode,'off');report.checks.push({name:'persistence and validation',restartRetainsMode:true,noAutoPlayOnStartup:true,invalidFallsBackOff:true});await shutdown();report.ok=true;
+}catch(error){report.ok=false;report.error=error.stack;throw error;}
+finally{await shutdown().catch(()=>rpc.child.kill());await fs.writeFile(path.join(root,'build/repeat-playback.json'),JSON.stringify(report,null,2));}console.log(JSON.stringify(report,null,2));

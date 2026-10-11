@@ -1,0 +1,2 @@
+# Optional pixel-comparison checks; the normal build needs only Python's stdlib.
+Pillow==12.3.0

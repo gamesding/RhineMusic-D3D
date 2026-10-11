@@ -1,0 +1,16 @@
+{
+  "version": "1.4.2",
+  "commit": "025f371dc76b598d77384fbdab90c937471844d8",
+  "source": "https://github.com/BYVoid/OpenCC",
+  "license": "Apache-2.0",
+  "derivedTables": "First-choice character and longest-phrase maps; original dictionaries retained unchanged",
+  "files": {
+    "LICENSE": "b534e465949558eec2597b04f5092b5e161236a68dfbfd04d547592ac3964308",
+    "TSCharacters.txt": "737c21c66f55a419dd6956cb3089476cdefc5a36877452631617696df1e5d925",
+    "TSPhrases.txt": "362fa1b9a7d6edd04b462a32e12c9fef3adae822ab1dee9c83561cc37c06cb1f",
+    "TWVariants.txt": "e187278e119c427ca561180ac5da5b20e9f8681190458f35c327ce499e95a6a5",
+    "HKVariants.txt": "e5cd4345303224587102f2c9e4d2b67d2b7e349c6ce9152e4a118f4656cf7302",
+    "search-characters.json": "64182579bd523ff4759594b1ca6cb2e911fdff67792e1cf363f9dc51fdb3f3fc",
+    "phrases.json": "0ffbd977c8f7ea8dbff6433c07aa85953d6c4b49d84496756e19a1eff222c8a2"
+  }
+}

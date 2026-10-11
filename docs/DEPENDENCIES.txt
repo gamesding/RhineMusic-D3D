@@ -1,0 +1,82 @@
+Rhine Music Direct3D native frontend -- private Windows distribution
+
+Original project: Rhine Music Demo 0.3.0. Original authors, notices and
+third-party licenses are retained in LICENSE, NOTICE.md, runtime/public/licenses
+and runtime/vendor/licenses. This private package does not relicense Sony or
+other proprietary components under MIT.
+
+Native C++20 frontend: Win32, Direct3D 11/12, DXGI, Direct2D, DirectWrite,
+Windows Imaging Component, WASAPI and Windows COM. MSVC CRT is linked statically.
+The unmodified AMD FSR DLL uses the app-local Microsoft VC143 x64 runtime
+14.44.35112. Its official redistributable DLLs, fixed hashes, Microsoft notices
+and the installed Visual Studio distributable-code list are included.
+The single-file extraction launcher uses the Windows .NET Framework 4 runtime.
+No Electron, Chromium, WebView or browser frontend is included.
+
+Node.js 26.7.0 (Node.js and bundled third-party licenses: licenses/node/LICENSE).
+The original loopback-only backend and native decoding/Sony processing remain
+program components. No developer installation is required to run the package.
+Python 3.14 private embedded runtime and Unicorn 2.1.4 are included solely for
+the original Sony DSP bridge; their licenses are retained in runtime/python.
+Native decoder/BASS/CD-DA/ASIO/DSD components retain their original license files.
+BASSWASAPI 2.4 add-on: official x64 DLL, C header and original basswasapi.txt
+are included. Exclusive output uses its EXCLUSIVE initialization flag; the
+actual negotiated sample rate is checked without silently using shared output.
+Official download: https://www.un4seen.com/files/basswasapi24.zip
+Documentation: https://www.un4seen.com/doc/basswasapi/BASS_WASAPI_Init.html
+Tabler Icons: repeat, repeat-once and repeat-off SVGs retain currentColor and
+the MIT license in runtime/licenses/tabler-icons/LICENSE. Official repository:
+https://github.com/tabler/tabler-icons (revision and hashes: sdk-sources.json).
+
+Sony libScePad 1.9: binary-only Rhine Pad bridge; no SDK source or headers are distributed.
+The compiled x64 bridge uses the project-owned C ABI in native/pad-bridge-api.h.
+Original controller library licenses are retained under licenses/scepad.
+Sony Walkman original runtime files retain their bytes and original licenses.
+They are not open source. Their expected SHA-256 values are recorded by the
+original Sony runtime and package manifests.
+
+NVIDIA DLSS Super Resolution SDK/runtime 310.9.1: NVIDIA SDK license retained.
+AMD FidelityFX SDK 2.3.0: AMD MIT header notices retained in licenses/fsr.
+FSR upscaling provider 4.1.1 uses the provider supported by the actual GPU;
+unsupported devices select the bundled FSR 3.1.5 implementation.
+Direct3D 11 uses the official FSR 1 spatial upscaler, as current temporal FSR
+requires Direct3D 12 or Vulkan. This is stated explicitly in the application.
+DirectX Shader Compiler 1.9.2609: Microsoft/LLVM licenses retained.
+SMAA: official HIGH SMAA 1x shaders and tables, iryoku MIT license retained.
+cgltf 1.15 and nlohmann/json 3.12.0 retain their embedded MIT header notices.
+
+SDK versions, official download sources and fixed hashes: licenses/sdk-sources.json.
+All executable package files have a SHA-256 inventory verified by the launcher.
+The package includes program models, fonts and original demonstration artwork;
+it excludes personal music, credentials, preferences and generated music caches.
+
+No public upload or redistribution is authorized by this private build.
+
+Kenney Input Prompts 1.5: official SVG assets, CC0 1.0 Universal.
+Source: https://kenney.nl/assets/input-prompts
+Selected PlayStation / Xbox face buttons, directional pad, analog stick,
+shoulder, options and touchpad glyphs are retained as original source SVGs.
+Runtime SVGs use a 64x64 viewBox, viewport-relative size and currentColor for day/night contrast;
+geometry is unchanged. Original CC0 notice and source SHA-256 are bundled.
+
+Tabler outline player-eject and repeat SVG icons use currentColor for both themes.
+Source: https://tabler.io/icons/icon/player-eject
+Their original MIT notice and fixed source revision are bundled with the runtime.
+The executable and native window icon retain upstream windows/app.ico unchanged.
+
+The optical-media reading indicator uses the original Tabler outline disc SVG,
+revision a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d, with its MIT license and SHA-256.
+Source: https://github.com/tabler/tabler-icons/blob/a4ce1404bc6d24d3c365afe7b258d6bf6f48d62d/icons/outline/disc.svg
+Media arrival detection uses the standard Windows WM_DEVICECHANGE volume event:
+https://learn.microsoft.com/en-us/windows/win32/devio/detecting-media-insertion-or-removal
+
+pinyin-pro 3.29.5: official offline dictionaries and ESM code, MIT.
+Source: https://github.com/zh-lx/pinyin-pro
+Official npm tarball is pinned and checked against its SHA-512 integrity.
+Original LICENSE and per-file hashes are included in runtime/vendor/pinyin-pro.
+OpenCC 1.4.2 official character, phrase and Taiwan/Hong Kong variant tables
+provide offline simplified/traditional matching; Apache-2.0 notices retained.
+Source: https://github.com/BYVoid/OpenCC/tree/025f371dc76b598d77384fbdab90c937471844d8
+Original dictionaries and LICENSE remain unchanged in runtime/vendor/opencc;
+derived JSON lookup tables are identified and hashed in its source.json.
+Search keys stay in memory; original music tags and stored indexes are unchanged.

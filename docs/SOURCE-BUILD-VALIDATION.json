@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-11",
+  "sourceBuild": {
+    "firstRootFreshConfigure": true,
+    "gitVisibleCloneFreshConfigure": true,
+    "unicodeAndSpacePath": true,
+    "upstreamNodeModulesRequired": false,
+    "privateSonySdkCompileIncludeOrLink": false,
+    "nativeSourceFilesCompared": 95,
+    "sameNativeShaderTestSource": true,
+    "packageSha256": "6eceb6e0f4e800cae01a3e68216e7c95624380d91bc5934fb7c237cf2079ac90",
+    "exeSha256": "8da454c9b8cc023768c039f3329c32b596af58ce18fd32a1c1c29f63ed1380e0",
+    "relocatedPackageSha256": "0a2169ad32d544142ccaf6af75084805aae76275952e0c78ed158fb304751292",
+    "relocatedExeSha256": "39ac0d763bdf3d6886559aabb78af45ceb5ab5d7b0775f39bae4d5238cb6c144",
+    "relocatedDifferences": [
+      "RhineDeviceProbe.exe",
+      "RhineMusicD3D.exe",
+      "runtime/vendor/audio/windows-x64/assets.json",
+      "runtime/vendor/audio/windows-x64/rhine-audio-host.exe"
+    ]
+  },
+  "checks": {
+    "ctest": 4,
+    "audioSoftware": 70,
+    "standalone": 12,
+    "renderedInteractions": 180,
+    "caretPixelFields": 15,
+    "controllerUi": 411,
+    "cdMedia": 492,
+    "cdControls": 71,
+    "originalIconImages": 6,
+    "shaderEntryPoints": 27,
+    "sourceSnapshotFiles": 483,
+    "originalSonyFiles": 10,
+    "controllerSvgSources": 59,
+    "readmeScreenshots": 10
+  },
+  "physicalControllersRetested": false,
+  "physicalCdEjectionRetested": false,
+  "controllerBridgeSha256": "0c4eb4731d3d93838daa32d46bf30cc6ca9ea65c769fc2766d025c18e6c17aea",
+  "controllerBridgeInitialized": true,
+  "copyrightREADMEEnding": "User supplied text preserved verbatim",
+  "cleanWindowsVm": false,
+  "uploaded": false
+}
