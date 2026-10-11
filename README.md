@@ -594,16 +594,6 @@ python .\tools\audit-package-inputs.py
 
 单文件首次启动需要验证并解压完整资源，之后复用相同内容哈希的运行目录。程序不需要互联网安装运行依赖；若杀毒软件隔离必要文件，应先核对来源和构建清单，而不是关闭所有系统保护。
 
-## 上传私有 GitHub 仓库
-
-- 保持仓库为私有，保留 `LICENSE`、`NOTICE.md` 和全部第三方许可。
-- `.gitignore` 已排除最终 EXE、构建目录、Node 构建解包目录、缓存和用户配置。
-- 必须提交随包的 `runtime/drivers`、固定图形 / 音频依赖、Node / Python 运行组件及 `vendor/build-dependencies.zip`，否则其他用户无法按完整功能编译运行。
-- 当前源码依赖采用实际文件，不要求 Git LFS。最大必需文件为随包 Node 可执行文件，低于 GitHub 100 MiB 普通文件上限。
-- GitHub 对超过 50 MiB 的文件可能显示提示；不要把构建出的约百余 MiB 单文件 EXE 加进源代码提交。规则见 [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)。
-- 上传前可运行 `python .\tools\verify-source.py`、查看 `git status`，确认没有个人音乐、路径配置、密码或调试符号。
-- 本次整理不自动创建提交、不推送或上传。私有托管也不会自动赋予第三方组件的再分发授权。
-
 ## 版权与来源
 
 本版本由GamesDing完成，DSEE, S-MASTER等由Sony Corporation持有版权，DS4,DS5是Sony Interactive Entertainment持有版权
