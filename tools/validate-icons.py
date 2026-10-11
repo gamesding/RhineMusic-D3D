@@ -28,7 +28,7 @@ def resources(file):
                 rva,size=struct.unpack_from('<II',source,base+target);values[next_keys]=source[physical(rva):physical(rva)+size]
     walk(0);return values
 checks=[]
-for name in ['RhineMusicD3D.exe','RhineMusic.exe']:
+for name in ['RhineMusicD3D.exe','Release/RhineMusic.exe','Release/RhineConfiguration.exe']:
     values=resources(root/name);groups=[(keys,data) for keys,data in values.items() if keys[0]==14];assert groups,name+' missing icon group'
     matched=[]
     for keys,group in groups:
@@ -43,4 +43,4 @@ for name in ['RhineMusicD3D.exe','RhineMusic.exe']:
     if name=='RhineMusicD3D.exe':assert 101 in matched
     checks.append({'exe':name,'originalIconImages':count,'matchingResourceIds':matched,'sha256':hashlib.sha256((root/name).read_bytes()).hexdigest()})
 report={'ok':True,'originalIcoSha256':hashlib.sha256(original).hexdigest(),'unchangedIcoBytes':len(original),'checks':checks}
-(root/'build/icon-validation.json').write_text(json.dumps(report,indent=2),'utf-8');print('Original program icon retained byte for byte in both EXEs ('+str(count)+' resolutions).')
+(root/'build/icon-validation.json').write_text(json.dumps(report,indent=2),'utf-8');print('Original program icon retained byte for byte in all three EXEs ('+str(count)+' resolutions).')

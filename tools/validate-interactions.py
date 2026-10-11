@@ -35,7 +35,7 @@ def validate_caret_pixels(directory):
 parser=argparse.ArgumentParser();parser.add_argument('--packaged',action='store_true');parser.add_argument('--quick',action='store_true');args=parser.parse_args()
 root=Path(__file__).resolve().parents[1];out=root/'build/interaction-validation';out.mkdir(parents=True,exist_ok=True)
 package=json.loads((root/'build/package/package-manifest.json').read_text('utf-8')) if args.packaged else None
-binary=root/('RhineMusic.exe' if args.packaged else 'RhineMusicD3D.exe');env=os.environ.copy();env['RHINE_D3D_DEBUG']='1'
+binary=root/('Release/RhineMusic.exe' if args.packaged else 'RhineMusicD3D.exe');env=os.environ.copy();env['RHINE_D3D_DEBUG']='1'
 if args.packaged:
     for name in list(env):
         if name.upper().startswith(('RHINE_','SONY_WALKMAN_','PYTHON','NODE_')) or name.upper()=='MUSIC_DATA_DIR':env.pop(name,None)

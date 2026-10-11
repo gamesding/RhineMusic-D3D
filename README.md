@@ -1,4 +1,4 @@
-# Rhine Music · Direct3D Windows 原生版
+# Rhine Music · Direct3D Windows 原生版 0.1
 
 基于 Rhine Music / RhineLabUI 的 Windows 原生重构工程，由 [GamesDing](https://github.com/gamesding) 完成本版本重构。前端使用 **C++20、Win32、Direct3D 11 / 12、Direct2D 和 DirectWrite**，保留原版的音乐档案馆、玻璃专辑架、动画、音乐库、音频处理与署名。
 
@@ -6,8 +6,15 @@
 
 **这是完整的私有源码发行工程。** 本项目自己的前端、着色器、后端、音频宿主、打包器、模型脚本与验证代码都在仓库中。PS4 / PS5 底层 SDK 调用组件按二进制形式提供；用户不需要获得 Sony 私有头文件，就能编译并使用手柄功能。厂商二进制、字体和非代码素材各自保留原许可，不随项目程序代码改授 MIT。
 
+**发行版本为 0.1，上游基础版本仍为 V0.3.0。** 最终播放器、独立图形配置程序、使用说明、许可与 ZIP 包统一生成在仓库的 `Release/`。第一次运行或遇到显卡兼容问题时，先打开 `Release/RhineConfiguration.exe`，保存后再手动启动 `Release/RhineMusic.exe`。
+
+## 维护与反馈
+
+本衍生版本基于上游 **V0.3.0**，由 [GamesDing](https://github.com/gamesding) 维护 Windows 原生实现与功能扩展。项目仓库为 [gamesding/RhineMusic-D3D](https://github.com/gamesding/RhineMusic-D3D)，问题与建议请提交到本仓库的 [Issues](https://github.com/gamesding/RhineMusic-D3D/issues)。上游来源、版本差异与适用署名、许可见下文；本版本由其维护者独立提供支持。
+
 ## 目录
 
+- [维护与反馈](#维护与反馈)
 - [界面截图](#界面截图)
 - [这次重构做了什么](#这次重构做了什么)
 - [音乐库与搜索](#音乐库与搜索)
@@ -15,6 +22,7 @@
 - [音频输出与 Sony 音效](#音频输出与-sony-音效)
 - [CD 播放与光盘交互](#cd-播放与光盘交互)
 - [图形接口、超分与反射](#图形接口超分与反射)
+- [独立图形配置程序](#独立图形配置程序)
 - [鼠标、键盘、触屏与手柄](#鼠标键盘触屏与手柄)
 - [设置、界面与动画](#设置界面与动画)
 - [编译完整程序](#编译完整程序)
@@ -71,7 +79,8 @@
 | CD | 增加直接读取和播放音频 CD、插盘反馈、自动选中、新的光盘外观、弹出与手柄震动。 |
 | 搜索与编辑 | 支持简繁互搜、拼音与首字母；统一焦点效果、真实闪烁光标与密码遮罩。 |
 | 稳定性 | 修复面板短暂上跳、滚动条无法拖动、列表边界继续滚动产生抖动、提示框文字被裁切等问题。 |
-| 程序打包 | 生成双击即用的单文件 `RhineMusic.exe`；嵌入资源、运行库、许可与文件校验清单。 |
+| 独立图形配置 | 软件绘制的配置窗口，无需先启动播放器；检测显卡、DX11 / DX12、光追、内存与 CPU，提供自动推荐、自定义及软件兼容渲染。 |
+| 程序打包 | 在 `Release/` 生成单文件播放器、独立配置程序与 0.1 ZIP 包；嵌入资源、运行库、许可与文件校验清单。 |
 | 源码发行 | 提供离线构建依赖、自动探测工具路径的构建脚本、二进制手柄接口和实际构建验证记录。 |
 
 项目仍保留原版资源、上游源码快照与来源信息。独立的“音乐专辑 360° 模型查看器”因先前设备恢复 / 卡死问题，按使用者要求移除了入口；主页与专辑详情中的三维模型、玻璃、封面和交互继续保留。上游档案资料与原作资源也仍在工程中。
@@ -232,6 +241,61 @@ ASIO 驱动由声卡 / DAC 厂商提供，不属于本仓库。编译或运行�
 
 质量设置保留渲染比例、像素倍率、阴影、环境遮蔽、景深、透射、各向异性和抗锯齿等选项，并增加接口、超分、反射与 RTX 质量相关设置。效果是否更快取决于显卡、分辨率与开启的效果，应以设备上的实际表现为准。
 
+## 独立图形配置程序
+
+### 先配置，再启动播放器
+
+1. 双击 `Release/RhineConfiguration.exe`。配置窗口自身使用 WinForms / GDI+ 软件绘制，不需要先创建播放器的三维场景，也不依赖 DX12 能否运行。
+2. 等待检测完成，检查显卡名称与 DX11、DX12、光追能力提示。程序实际创建测试设备，并验证 DX12 与 Direct2D 所需的 D3D11On12 互操作；不只按显卡型号猜测。
+3. 选择“自动推荐”或“自定义”，按自己的需要选择超分。
+4. 点击“确认并保存”。弹出“设置成功”提示后，点击“确定”，配置程序关闭。
+5. 手动双击 `Release/RhineMusic.exe`。播放器在首次创建图形设备前读取这些设置，低配置用户不必先承受默认 DX12 / 高画质再进入设置修改。
+
+配置程序不会自动启动播放器。取消或关闭窗口不会写入设置。播放器正在运行时，配置程序会提示先关闭播放器，防止两个程序同时覆盖配置。
+
+### 自动推荐如何判断
+
+检测结果包含每张显卡的独立标识、显存、DX11 / DX12 互操作、DXR 能力和对应光谱效果条件，也包含内存、逻辑处理器数量与是否使用电池供电。多显卡环境自动挑选可用的较强设备；自定义模式可指定另一张显卡。两张同名显卡仍按不同设备标识区分。
+
+| 检测条件 | 推荐方向 |
+| --- | --- |
+| 不具备可用硬件 DX11，且系统 WARP 可用 | DX11 软件兼容渲染，降低三维分辨率、关闭反射 / 阴影 / 环境遮蔽 / 景深 |
+| 显存不足 2 GB、内存不足 6 GB、少于 4 个逻辑处理器，或电池供电 | DX11、性能档、关闭反射；硬件路径默认兼容 FSR，减少透射与后处理负担 |
+| 其他可用硬件 | 已验证的 DX12 或 DX11、SSR、适度分辨率与原版质量参数 |
+| 显存至少 6 GB、内存至少 8 GB，且满足本项目 RTX 光谱条件 | DX12、平衡光追质量；支持时默认 DLSS |
+
+自动推荐使用保守的能力与资源规则，不运行长时间性能基准，也不保证所有机器上都是最高帧率。推荐结果会在窗口中明确显示，用户可以随后切到自定义微调。
+
+自动模式仍允许选择“原生分辨率”或超分，以及超分的质量 / 平衡 / 性能档。非 NVIDIA 显卡只有 FSR 与原生选项；NVIDIA GTX 等不支持 DLSS 的设备同样不显示 DLSS。具备 DLSS 条件的 NVIDIA RTX 可选择 DLSS、FSR 或原生。DX11 使用随包的 FSR 1，DX12 由随包 FidelityFX 提供实际可用的 FSR 路线，驱动不满足某条路线时由播放器报告回退。
+
+### 自定义参数与兼容恢复
+
+| 参数 | 可选内容与约束 |
+| --- | --- |
+| 渲染设备 | 已检测显卡；系统 WARP 可用时另提供“Windows 软件渲染” |
+| 图形接口 | DX11；通过实际 DX12 / D3D11On12 检测时可选 DX12 |
+| 超分与质量 | 原生、FSR、符合条件的 DLSS；质量 / 平衡 / 性能 / 原生抗锯齿 |
+| 反射 | 关闭、SSR；满足 NVIDIA RTX / DXR 1.1 / 着色器条件的 DX12 设备才显示 RTX 光谱光追 |
+| 反射质量 | 性能、平衡、质量 |
+| 基础画质 | 性能、原始、高、极高；继续保留播放器原有参数 |
+| 精细参数 | 渲染比例、像素倍率、阴影、环境遮蔽采样与分辨率、景深、透射分辨率、各向异性和 SMAA |
+
+更换显卡或改为 DX11 时，窗口会同步移除不支持的选项，并调整无效组合。软件渲染固定使用 DX11 / 原生 / 关闭反射；它用于恢复显示与修改设置，复杂三维场景在 CPU 上仍可能较慢。若老机器白屏，建议先选择 DX11、性能档和关闭反射，必要时再使用软件兼容渲染；本次没有在真实老显卡上实测所有组合。
+
+设置保存到播放器原有的 `%APPDATA%\Rhine Music\preferences.json`；开发隔离环境继续支持 `RHINE_APP_HOME`。仅更新图形相关字段，保留音乐目录、音频输出、音效、主题、音量与循环状态。保存采用写临时文件后原子替换；配置文件损坏时提示修复，不覆盖原文件。播放器遇到无法解析的启动图形设置时使用默认值。
+
+0.1 配置窗口的圆角白边修复已包含在 `Release/RhineMusic-D3D-v0.1-Windows-x64.zip` 中；预编译包和自行编译使用同一标准文件名，包含修复后的独立配置 EXE 和完整播放器。
+
+### 配置程序截图
+
+下面是配置程序实际绘制的窗口，使用自动化测试中的合成显卡数据展示选项规则；合成数据不代表已在这些品牌的全部硬件上实测。实际电脑的两张 RTX A4500、DX11 / DX12、DLSS、光追与 WARP 路径另有渲染验证记录。
+
+![独立配置程序：深夜主题、自动推荐与超分选择](docs/media/configuration-auto-night.png)
+
+![独立配置程序：暖昼主题、自定义参数与真实滚动区域](docs/media/configuration-custom-day.png)
+
+![小屏幕配置：紧凑布局、滚动参数与保持可见的确认按钮](docs/media/configuration-compact.png)
+
 ## 鼠标、键盘、触屏与手柄
 
 ### 鼠标与触屏
@@ -330,7 +394,7 @@ Xbox 使用 XInput；DualShock 4 / DualSense 使用随包二进制控制器桥�
 | Windows SDK | Windows 10 / 11 SDK，包含 x64 `fxc.exe`；本次验证使用 10.0.26100.0 |
 | CMake | 3.24 或以上，加入 PATH |
 | 外部 Python | 3.11 或以上，加入 PATH；本次验证使用 3.14 |
-| 打包器 | 系统 .NET Framework 4 的 `Framework64\v4.0.30319\csc.exe` |
+| 打包器与配置程序 | 系统 .NET Framework 4.8；使用 `Framework64\v4.0.30319\csc.exe` 编译 |
 | 空间 | 建议至少 5 GB 空闲空间，供源代码、依赖解包、中间文件及 EXE 打包使用 |
 
 运行程序所带的嵌入式 Python 用于原有音效桥接，不用它替代上述开发用 Python。Visual Studio Community、Professional 和 Build Tools 均可按组件要求准备；脚本不会硬编码 Professional 的安装目录。
@@ -345,7 +409,7 @@ Xbox 使用 XInput；DualShock 4 / DualSense 使用随包二进制控制器桥�
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
-默认执行完整 Release 构建与打包。编译并执行 CTest、音频软件检查和单文件隔离测试：
+默认执行完整 Release 构建，生成播放器、配置程序和 ZIP 包。编译并执行 CTest、音频软件检查、单文件隔离测试、配置程序与首次图形设备验证：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1 -Verify
@@ -373,13 +437,19 @@ python .\tools\build.py --verify --jobs 4
 6. 执行 CMake x64 配置，使用已安装的 VS 2022 编译所有原生目标。
 7. 从 Windows SDK 自动查找 FXC，用随包 DXC 编译三维、SSR、SMAA、FSR 与光追着色器。
 8. 更新音频宿主文件哈希，打包程序文件、许可与运行清单。
-9. 生成单文件 `RhineMusic.exe`，审计包输入；使用 `-Verify` 时再运行验证。
+9. 编译软件绘制的独立配置窗口，将硬件探测器与原图标嵌入 `RhineConfiguration.exe`。
+10. 在 `Release/` 生成单文件播放器、配置程序、许可、使用说明、SHA-256 清单与 0.1 ZIP 包，审计包输入；使用 `-Verify` 时再运行验证。
 
 ### 产物
 
 | 文件 / 目录 | 作用 |
 | --- | --- |
-| `RhineMusic.exe` | 最终双击即用的单文件发行程序 |
+| `Release/RhineMusic.exe` | 最终双击即用的单文件播放器，版本 0.1 |
+| `Release/RhineConfiguration.exe` | 独立图形配置程序，可单独复制运行，内嵌硬件探测器 |
+| `Release/RhineMusic-D3D-v0.1-Windows-x64.zip` | 0.1 完整发行压缩包，顶层目录 `RhineMusic-D3D-0.1/` |
+| `Release/使用说明.txt` | 配置 → 确认 → 手动启动播放器的中文说明 |
+| `Release/SHA256SUMS.txt` | 两个 EXE 与随包文档的 SHA-256 校验值 |
+| `Release/LICENSE`、`NOTICE.md`、`THIRD-PARTY.txt` | 随发行包保留的上游及第三方许可说明 |
 | `RhineMusicD3D.exe` | 原生播放器开发运行目标；需要仓库内的 backend / runtime / shaders |
 | `RhineDeviceProbe.exe` | 手柄、光驱和硬件信息检查 |
 | `RhineGraphicsProbe.exe` | 图形路径检查 |
@@ -410,6 +480,9 @@ RhineMusic-D3D/
 ├─ shaders/                     HLSL、光盘材质、SSR / 光追 / SMAA / FSR
 ├─ backend/                     本地服务、循环、搜索及播放器适配
 ├─ windows/                     单文件启动器、清单和原版 ICO
+│  ├─ Configuration.cs          软件绘制配置窗口、主题、交互与成功提示
+│  ├─ ConfigurationModel.cs     硬件推荐、参数约束与原子保存
+│  └─ ConfigurationTests.cs     隔离的配置策略与实际控件检查
 ├─ runtime/                     运行资源、Node、Python、字典、解码器与厂商库
 │  └─ drivers/                  仅二进制的 Sony 手柄桥接及哈希说明
 ├─ vendor/                      固定构建依赖、头文件、链接库及原始许可
@@ -420,6 +493,7 @@ RhineMusic-D3D/
 ├─ tools/                       准备、编译、打包、审计与验证脚本
 ├─ tests/                       原生状态、CD 场景与触摸板行为检查
 ├─ docs/                        技术文档、二进制边界、验证记录与截图
+├─ Release/                     0.1 EXE、ZIP、许可与使用说明；构建生成，不提交
 ├─ source-manifest.json          上游来源及保留文件 SHA-256
 ├─ LICENSE                      保留的上游程序代码许可
 └─ NOTICE.md                    保留的上游素材与来源说明
@@ -434,6 +508,13 @@ RhineMusic-D3D/
 ## 验证方法与覆盖范围
 
 本次源码整理的具体结果见 [SOURCE-BUILD-VALIDATION.md](docs/SOURCE-BUILD-VALIDATION.md)。历史技术文档记录原开发阶段的检查，不能替代这份源码副本的实际构建记录。
+
+0.1 新增配置程序、启动设置、最终目录构建与发行验证见 [RELEASE-0.1.md](docs/RELEASE-0.1.md)。配置策略检查包含 NVIDIA RTX / GTX、AMD、Intel、低配置、软件渲染、多显卡、电池模式、选项联动、真实控件滚动、保存与确认退出；图形集成检查验证 DX11、DX12、超分、反射及 WARP 从首次设备创建就采用保存配置。
+
+```powershell
+# 独立配置程序、五条实际渲染路径与首次设备设置
+python tools/validate-configuration.py
+```
 
 常用验证命令：
 

@@ -1,5 +1,6 @@
 # Generated builds and single-file output (the output EXE exceeds GitHub's file limit).
 /build/
+/Release/
 /build-tools/node_modules/
 /upstream/node_modules/
 /RhineMusic.exe

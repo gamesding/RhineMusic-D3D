@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(RhineMusicD3D VERSION 0.3.0 LANGUAGES CXX RC)
+project(RhineMusicD3D VERSION 0.1.0 LANGUAGES CXX RC)
 if(NOT WIN32 OR NOT MSVC)
   message(FATAL_ERROR "Windows x64 and the installed MSVC toolchain are required")
 endif()
@@ -28,11 +28,27 @@ target_link_libraries(rhine_platform PUBLIC dxgi d3d12 dxguid d3dcompiler d3d11 
   winhttp shell32 shlwapi user32 gdi32 ole32 uuid xinput hid setupapi winmm advapi32 bcrypt)
 add_executable(RhineDeviceProbe native/probe.cpp)
 target_link_libraries(RhineDeviceProbe PRIVATE rhine_platform)
-add_library(rhine_scene STATIC native/scene.cpp native/mesh.cpp native/service.cpp native/upscaler.cpp native/images.cpp native/renderer.cpp native/ui.cpp native/rays.cpp)
+add_library(rhine_scene STATIC native/scene.cpp native/mesh.cpp native/service.cpp native/upscaler.cpp native/images.cpp native/renderer.cpp native/ui.cpp native/rays.cpp native/graphics-settings.cpp)
 target_include_directories(rhine_scene PUBLIC vendor/dxc/inc vendor/fsr1/ffx-fsr vendor/cgltf vendor/dlss/include vendor/fsr/Kits/FidelityFX/api/include vendor/fsr/Kits/FidelityFX/upscalers/include)
 target_link_libraries(rhine_scene PUBLIC rhine_platform comctl32 "${CMAKE_CURRENT_SOURCE_DIR}/vendor/dlss/lib/Windows_x86_64/x64/nvsdk_ngx_s.lib")
 add_executable(RhineGraphicsProbe native/graphics-probe.cpp)
 target_link_libraries(RhineGraphicsProbe PRIVATE rhine_scene)
+add_executable(RhineConfigurationProbe native/configuration-probe.cpp)
+target_link_libraries(RhineConfigurationProbe PRIVATE rhine_platform)
+set(RHINE_CONFIGURATION_EXE "${CMAKE_CURRENT_BINARY_DIR}/configuration/RhineConfiguration.exe")
+set(RHINE_CSC "$ENV{SystemRoot}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
+if(NOT EXISTS "${RHINE_CSC}")
+  message(FATAL_ERROR "Windows .NET Framework 4 compiler is required for the standalone configuration program")
+endif()
+add_custom_command(OUTPUT "${RHINE_CONFIGURATION_EXE}"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/configuration"
+  COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/build-configuration.py"
+    --probe "$<TARGET_FILE:RhineConfigurationProbe>" --output "${RHINE_CONFIGURATION_EXE}"
+  DEPENDS RhineConfigurationProbe "$<TARGET_FILE:RhineConfigurationProbe>"
+    windows/ConfigurationModel.cs windows/Configuration.cs windows/ConfigurationTests.cs
+    windows/configuration.manifest windows/app.ico tools/build-configuration.py
+  VERBATIM COMMENT "Build the CPU-rendered standalone graphics configuration program")
+add_custom_target(RhineConfiguration ALL DEPENDS "${RHINE_CONFIGURATION_EXE}")
 configure_file(windows/native-icon.rc.in "${CMAKE_CURRENT_BINARY_DIR}/native-icon.rc" @ONLY)
 add_executable(RhineMusicD3D WIN32 native/main.cpp native/app.cpp native/application.manifest "${CMAKE_CURRENT_BINARY_DIR}/native-icon.rc")
 add_dependencies(RhineMusicD3D RhineOriginalUiAssets)
@@ -48,6 +64,10 @@ add_custom_command(TARGET RhineAudioHost POST_BUILD
 add_custom_command(TARGET RhineDeviceProbe POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:RhineDeviceProbe>" "${CMAKE_CURRENT_SOURCE_DIR}/RhineDeviceProbe.exe")
 enable_testing()
+add_test(NAME graphics_configuration_policy COMMAND "${RHINE_CONFIGURATION_EXE}" --self-test --report "${CMAKE_CURRENT_BINARY_DIR}/configuration-tests/report.json")
+add_executable(RhineGraphicsSettingsTests tests/graphics-settings.cpp)
+target_link_libraries(RhineGraphicsSettingsTests PRIVATE rhine_scene)
+add_test(NAME graphics_startup_preferences COMMAND RhineGraphicsSettingsTests)
 add_executable(RhineStateTests tests/native-state.cpp)
 target_link_libraries(RhineStateTests PRIVATE rhine_scene)
 add_test(NAME native_state_continuity COMMAND RhineStateTests)

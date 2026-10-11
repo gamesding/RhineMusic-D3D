@@ -10,7 +10,7 @@ env.pop('RHINE_DEMO',None);env.pop('RHINE_DEMO_FIXTURE',None)
 if packaged:
     package=json.loads(manifest_path.read_text('utf-8'))
     cache=Path(os.environ['LOCALAPPDATA'])/'RhineMusicD3D/runtimes'/package['payloadSha256'][:32]
-    binary=root/'RhineMusic.exe';assert hashlib.file_digest(binary.open('rb'),'sha256').hexdigest()==package['exeSha256']
+    binary=root/'Release/RhineMusic.exe';assert hashlib.file_digest(binary.open('rb'),'sha256').hexdigest()==package['exeSha256']
     env['RHINE_RUNTIME_ROOT']=str(cache.parent)
     system=env.get('SystemRoot',env.get('SYSTEMROOT'));env['PATH']=str(Path(system)/'System32')+os.pathsep+system
 results=[]

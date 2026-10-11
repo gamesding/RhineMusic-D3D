@@ -6,7 +6,8 @@
 namespace rhine {
 struct GraphicsOptions {
     std::string api="auto",upscaler="auto",upscaleQuality="quality",reflections="ssr",reflectionQuality="balanced";
-    int shadows=2048,aoSamples=32,anisotropy=16;float scale=1,dof=1,transmission=1,aoResolution=1,pixelRatio=1.5f;bool smaa=false,vsync=true,archive=false;
+    std::string adapter;
+    int shadows=2048,aoSamples=32,anisotropy=16;float scale=1,dof=1,transmission=1,aoResolution=1,pixelRatio=1.5f;bool smaa=false,vsync=true,archive=false,software=false;
 };
 struct ScreenGlass {XMFLOAT4 rectangle{};XMFLOAT2 pointer{-1000,-1000};float reveal=0,radius=40;};
 class Renderer {

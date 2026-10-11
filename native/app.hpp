@@ -15,13 +15,14 @@ class App {
     void observeCdLibrary(const json& library,const std::string& shelf);void updateCdSelection();
     bool isolatePhysicalInput_=false;uint64_t controllerActionSequence_=0;json controllerActions_=json::array();
     std::map<unsigned,XMFLOAT2> touches_;bool touchMultiple_=false;double touchDistance_=0;XMFLOAT2 touchCenter_{};
+    json startupGraphics_=json::object();
     json musicLibrary_=json::object();int musicSelection_=0;bool archivePending_=false;std::optional<Scene> musicScene_;std::optional<Presentation> musicPresentation_;std::optional<SurfaceMotion> musicDetailMotion_,musicBrowseMotion_;
     void archive(bool enabled,std::string view="browse");
     void recoverGraphics(const HresultError& error);
     void receive(const json& event);void navigate(const json& args);void locate(std::string album,std::string track);void panels(const std::string& panel);void preference(const json& args);void refreshGraphics();
     void request(std::string path,std::optional<json> body,std::function<void(const json&)> result={},std::function<void(const std::string&)> failure={});void notify(std::string message);void rpc(std::string operation,json args=json::object(),std::function<void(const json&)> result={},std::function<void(const std::string&)> failure={});void toggleFullscreen();void onlineSearch(bool more);bool selectedCd()const;void ejectCd();
 public:
-    App(HWND window,std::filesystem::path root,GraphicsOptions options,bool isolatePhysicalInput=false);
+    App(HWND window,std::filesystem::path root,GraphicsOptions options,bool isolatePhysicalInput=false,json startupPreferences=json::object());
     ~App();
     void tick(double now,bool renderFrame=true);
     void command(std::string action,json args=json::object());

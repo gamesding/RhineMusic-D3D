@@ -61,6 +61,8 @@ def main():
         run(['ctest','--test-dir',ROOT/'build','-C','Release','--output-on-failure'])
         run([sys.executable,ROOT/'tools/validate-final-audio.py'])
         run([sys.executable,ROOT/'tools/validate-standalone.py','--software-only'])
-    print('Build complete: '+str(ROOT/'RhineMusic.exe'),flush=True)
+        run([sys.executable,ROOT/'tools/validate-configuration.py'])
+        run([sys.executable,ROOT/'tools/validate-icons.py'])
+    print('Build complete: '+str(ROOT/'Release/RhineMusic.exe'),flush=True)
 
 if __name__=='__main__':main()

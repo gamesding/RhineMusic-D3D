@@ -23,7 +23,7 @@ for name,fixture,view,night,api,upscaler in [
     ('controller-help','parity','controller-help',True,'dx11','native'),
 ]:
     print('Capturing '+name,flush=True);report=reports/(name+'.json');image=media/(name+'.png')
-    command=[str(root/'RhineMusic.exe'),'--self-test','--demo','--fixture',fixture,'--view',view,'--api',api,'--upscaler',upscaler,'--reflections','ssr','--width','1600','--height','900','--quality','high','--duration','8','--report',str(report),'--image',str(image)]
+    command=[str(root/'Release/RhineMusic.exe'),'--self-test','--demo','--fixture',fixture,'--view',view,'--api',api,'--upscaler',upscaler,'--reflections','ssr','--width','1600','--height','900','--quality','high','--duration','8','--report',str(report),'--image',str(image)]
     if night:command.append('--night')
     result=subprocess.run(command,cwd=root,env=env,creationflags=0x08000000,timeout=85)
     data=json.loads(report.read_text('utf-8'))

@@ -10,7 +10,7 @@ assert (cache/'.rhine-native-owned').read_text('utf-8').strip()==package['payloa
 for name,digest in package['files'].items():
     file=cache/name;assert file.is_file() and not file.is_symlink()
     assert hashlib.file_digest(file.open('rb'),'sha256').hexdigest()==digest,name
-assert hashlib.file_digest((root/'RhineMusic.exe').open('rb'),'sha256').hexdigest()==package['exeSha256']
+assert hashlib.file_digest((root/'Release/RhineMusic.exe').open('rb'),'sha256').hexdigest()==package['exeSha256']
 runtime=cache/'runtime';env=os.environ.copy()
 for name in list(env):
     if name.upper().startswith(('RHINE_','SONY_WALKMAN_','PYTHON','NODE_')) or name.upper()=='MUSIC_DATA_DIR':env.pop(name,None)

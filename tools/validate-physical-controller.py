@@ -8,7 +8,7 @@ out=root/('build/physical-cd' if options.cd else 'build/physical-controller');ou
 live=out/'live.json';report=out/'physical-validation.json'
 env=os.environ.copy();env['RHINE_D3D_DEBUG']='1'
 for name in ['RHINE_APP_HOME','MUSIC_DATA_DIR','RHINE_DEMO','RHINE_DEMO_FIXTURE']:env.pop(name,None)
-binary=root/('RhineMusic.exe' if options.packaged else 'RhineMusicD3D.exe');binary_hash=hashlib.file_digest(binary.open('rb'),'sha256').hexdigest()
+binary=root/('Release/RhineMusic.exe' if options.packaged else 'RhineMusicD3D.exe');binary_hash=hashlib.file_digest(binary.open('rb'),'sha256').hexdigest()
 args=[str(binary),'--interactive-test','--api','dx11','--upscaler','native','--view','browse','--width','1280','--height','720','--duration','600','--report',str(live)]
 if not options.cd:args+=['--demo','--fixture','parity']
 child=subprocess.Popen(args,cwd=root,env=env,creationflags=0x08000000)

@@ -5,7 +5,7 @@ root=Path(__file__).resolve().parents[1];out=root/'build/cd-controls';out.mkdir(
 parser=argparse.ArgumentParser();parser.add_argument('--packaged',action='store_true');options=parser.parse_args()
 env=os.environ.copy();env['RHINE_D3D_DEBUG']='1'
 for name in ['RHINE_APP_HOME','MUSIC_DATA_DIR','RHINE_DEMO','RHINE_DEMO_FIXTURE']:env.pop(name,None)
-binary=root/('RhineMusic.exe' if options.packaged else 'RhineMusicD3D.exe');report=out/'ui.json'
+binary=root/('Release/RhineMusic.exe' if options.packaged else 'RhineMusicD3D.exe');report=out/'ui.json'
 result=subprocess.run([str(binary),'--self-test','--demo','--fixture','cd-ui','--scenario','cd-controls','--api','dx11','--upscaler','native','--width','1280','--height','720','--report',str(report)],cwd=root,env=env,creationflags=0x08000000,timeout=150)
 data=json.loads(report.read_text('utf-8'))
 if result.returncode or not data['ok']:raise RuntimeError(data.get('error','Native CD/footer test failed; see '+str(report)))

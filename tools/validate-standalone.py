@@ -7,7 +7,7 @@ root=Path(__file__).resolve().parent.parent
 if not (root/'CMakeLists.txt').is_file() or not (root/'native/main.cpp').is_file():raise RuntimeError('Expected the RhineMusic D3D project root')
 out=root/'build/portable-validation';out.mkdir(parents=True,exist_ok=True)
 delivery=out/'\u4e2d\u6587\u8def\u5f84 \u70b9\u5f00\u5373\u7528';delivery.mkdir(exist_ok=True)
-exe=delivery/'RhineMusic.exe';shutil.copy2(root/'RhineMusic.exe',exe)
+exe=delivery/'RhineMusic.exe';shutil.copy2(root/'Release/RhineMusic.exe',exe)
 assert sorted(file.name for file in delivery.iterdir())==['RhineMusic.exe']
 runtimeBase=out/'\u5185\u7f6e\u8fd0\u884c\u65f6'/('run-'+uuid.uuid4().hex[:12]);runtimeBase.mkdir(parents=True)
 env=os.environ.copy()

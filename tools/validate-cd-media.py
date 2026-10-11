@@ -20,7 +20,7 @@ def validate_static_thumbnail(directory):
 root=Path(__file__).resolve().parents[1];parser=argparse.ArgumentParser();parser.add_argument('--packaged',action='store_true');parser.add_argument('--quick',action='store_true');args=parser.parse_args()
 out=root/'build/cd-media-validation';out.mkdir(parents=True,exist_ok=True)
 package=json.loads((root/'build/package/package-manifest.json').read_text('utf-8')) if args.packaged else None
-binary=root/('RhineMusic.exe' if args.packaged else 'RhineMusicD3D.exe');env=os.environ.copy()
+binary=root/('Release/RhineMusic.exe' if args.packaged else 'RhineMusicD3D.exe');env=os.environ.copy()
 for name in list(env):
     if name.upper().startswith(('RHINE_','SONY_WALKMAN_','PYTHON','NODE_')) or name.upper()=='MUSIC_DATA_DIR':env.pop(name,None)
 env['RHINE_D3D_DEBUG']='1';system=env.get('SystemRoot',env.get('SYSTEMROOT'));env['PATH']=str(Path(system)/'System32')+os.pathsep+system
